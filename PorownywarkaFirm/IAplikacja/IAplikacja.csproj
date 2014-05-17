@@ -43,10 +43,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IDane\IDane.csproj">
-      <Project>{45355124-7934-45d8-8d18-bba6aaf600b4}</Project>
-      <Name>IDane</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Logika\Logika.csproj">
       <Project>{f72615cc-ea5f-489e-bc30-d0b253140fd8}</Project>
       <Name>Logika</Name>

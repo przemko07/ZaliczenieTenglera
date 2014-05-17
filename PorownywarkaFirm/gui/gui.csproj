@@ -233,9 +233,17 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Aplikacja\Aplikacja.csproj">
+      <Project>{af106cc4-7e40-45fd-bdbe-1c086b90e8d0}</Project>
+      <Name>Aplikacja</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dane\Dane.csproj">
       <Project>{46063884-3fb6-433f-9ada-df97d33df37f}</Project>
       <Name>Dane</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IAplikacja\IAplikacja.csproj">
+      <Project>{7b89e22d-3eef-4f19-a5f3-08d9dbbb5458}</Project>
+      <Name>IAplikacja</Name>
     </ProjectReference>
     <ProjectReference Include="..\IDane\IDane.csproj">
       <Project>{45355124-7934-45d8-8d18-bba6aaf600b4}</Project>
