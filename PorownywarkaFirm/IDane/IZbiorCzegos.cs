@@ -14,6 +14,6 @@ namespace IDane
         
         void Usun(T obj);
         
-        IEnumerable<T> Wczytaj(T obj);
+        IEnumerable<T> Wczytaj();
     }
 }
