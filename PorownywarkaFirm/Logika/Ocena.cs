@@ -12,5 +12,7 @@ namespace Logika
         public int wyglad_firmy { get; set; }
 
         public virtual Firma firma { get; set; }
+
+        public virtual Uzytkownik uzytkownik { get; set; }
     }
 }

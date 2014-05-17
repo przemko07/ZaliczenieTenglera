@@ -14,5 +14,9 @@ namespace Logika
         public string tresc { get; set; }
 
         public virtual Firma firma { get; set; }
+
+        public virtual Uzytkownik wlasciciel { get; set; }
+
+        public virtual ICollection<Uzytkownik> uzytkownicy_korzy_ocenili { get; set; }
     }
 }
