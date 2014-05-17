@@ -9,24 +9,24 @@ namespace IAplikacja
 {
     public interface IZbiorFunkcji
     {
-        public void OcenienieKomentarzaPozytywnie(Komentarz komentarz, Uzytkownik uzytkownik);
+        void OcenienieKomentarzaPozytywnie(Komentarz komentarz, Uzytkownik uzytkownik);
 
-        public void OcenienieKomentarzaNegatywnie(Komentarz komentarz, Uzytkownik uzytkownik);
+        void OcenienieKomentarzaNegatywnie(Komentarz komentarz, Uzytkownik uzytkownik);
 
-        public IEnumerable<Firma> PobierzNajlepszeFirmy();
+        IEnumerable<Firma> PobierzNajlepszeFirmy();
 
-        public IEnumerable<Firma> Pobierz10NajlepszychFirmWedlogPaczki(int paczka);
+        IEnumerable<Firma> Pobierz10NajlepszychFirmWedlogPaczki(int paczka);
 
-        public IEnumerable<Komentarz> PobierzNajlepszeKomentarzeFirmy(Firma firma);
+        IEnumerable<Komentarz> PobierzNajlepszeKomentarzeFirmy(Firma firma);
 
-        public IEnumerable<Komentarz> PobierzNajlepszeKomentarzeFirmyWedlogPaczki(int paczka);
+        IEnumerable<Komentarz> PobierzNajlepszeKomentarzeFirmyWedlogPaczki(int paczka);
 
-        public void ZarejestrujFirmeUzytkownika(Uzytkownik uzytkownik, Firma firma);
+        void ZarejestrujFirmeUzytkownika(Uzytkownik uzytkownik, Firma firma);
 
-        public void WystawOceneFirmie(Uzytkownik uzytkownik, Firma firma, Ocena ocena);
+        void WystawOceneFirmie(Uzytkownik uzytkownik, Firma firma, Ocena ocena);
 
-        public void WystawKomentarzFirmie(Uzytkownik uzytkownik, Firma firma, Komentarz komentarz);
+        void WystawKomentarzFirmie(Uzytkownik uzytkownik, Firma firma, Komentarz komentarz);
 
-        public Ocena ObliczSredniaOceneFirmy(Firma firma);
+        Ocena ObliczSredniaOceneFirmy(Firma firma);
     }
 }
