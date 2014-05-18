@@ -27,8 +27,8 @@ namespace ConsoleApplication1
                 {
                     case 1:
                         Adres adr= new Adres();
-                        adr.id = Convert.ToInt32(Console.ReadLine());
                         adr.miasto = Console.ReadLine();
+                        adr.firma = new Firma();
                         con.Zapisz(adr);
                         break;
                     case 2:

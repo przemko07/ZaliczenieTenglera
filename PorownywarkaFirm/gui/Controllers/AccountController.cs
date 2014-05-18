@@ -18,7 +18,7 @@ namespace gui.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        public AccountController(IZbiorDanych dane, IAplikacja.IZbiorFunkcji a)
+        public AccountController(IZbiorDanych dane)
             : this(new UserManager<Uzytkownik>(new UserStore<Uzytkownik>(dane.DBContext as DbContext)))
         {
         }
@@ -30,7 +30,7 @@ namespace gui.Controllers
 
         public UserManager<Uzytkownik> UserManager { get; private set; }
 
-        //
+
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -381,7 +381,8 @@ namespace gui.Controllers
 
         private class ChallengeResult : HttpUnauthorizedResult
         {
-            public ChallengeResult(string provider, string redirectUri) : this(provider, redirectUri, null)
+            public ChallengeResult(string provider, string redirectUri)
+                : this(provider, redirectUri, null)
             {
             }
 

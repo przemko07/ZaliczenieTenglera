@@ -1,5 +1,6 @@
 ﻿using IDane;
 using Logika;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,15 +12,48 @@ namespace Dane
 {
     public class ZbiorDanych : DbContext, IZbiorDanych
     {
-        public ZbiorDanych() : base() { }
-         
+        public ZbiorDanych()
+            : base()
+        {
+            System.Data.Entity.Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ZbiorDanych>());
+        }
+
         public DbSet<Adres> DBAdresy { get; set; }
         public DbSet<Firma> DBFirmy { get; set; }
         public DbSet<Komentarz> DBKomentarze { get; set; }
         public DbSet<Kontakt> DBKontakty { get; set; }
         public DbSet<Ocena> DBOceny { get; set; }
-        public DbSet<Uzytkownik> DBUżytkownicy { get; set; }
-        
+        public DbSet<Uzytkownik> DBUzytkownicy { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id).Property(p => p.Name).IsRequired();
+            modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
+            modelBuilder.Entity<IdentityUserLogin>().HasKey(u => new { u.UserId, u.LoginProvider, u.ProviderKey });
+
+            modelBuilder.Entity<Uzytkownik>().HasKey(n => n.Id);
+            modelBuilder.Entity<Adres>().HasKey(n => n.id);
+            modelBuilder.Entity<Kontakt>().HasKey(n => n.id);
+            modelBuilder.Entity<Ocena>().HasKey(n => n.id);
+            modelBuilder.Entity<Komentarz>().HasKey(n => n.id);
+            modelBuilder.Entity<Firma>().HasKey(n => n.id);
+
+            modelBuilder.Entity<Adres>().HasRequired(n => n.firma).WithOptional(n => n.adres);
+
+            modelBuilder.Entity<Kontakt>().HasRequired(n => n.firma).WithOptional(n => n.kontakt);
+
+            modelBuilder.Entity<Ocena>().HasRequired(n => n.uzytkownik).WithMany(n => n.oceny_firm);
+            modelBuilder.Entity<Ocena>().HasRequired(n => n.firma).WithMany(n => n.oceny);
+          
+            modelBuilder.Entity<Uzytkownik>().HasOptional(n => n.firma).WithOptionalPrincipal(n => n.wlasciciel);
+            modelBuilder.Entity<Uzytkownik>().HasMany(n => n.ocenione_komentarze).WithMany(n => n.uzytkownicy_korzy_ocenili);
+            modelBuilder.Entity<Uzytkownik>().HasMany(n => n.wystawione_komentarze).WithRequired(n => n.wlasciciel).WillCascadeOnDelete(false);
+            
+            modelBuilder.Entity<Komentarz>().HasRequired(n => n.firma).WithMany(n => n.komentarze);
+        }
+
         #region pomocnik
         public IZbiorAdresow Adresy { get { return this as IZbiorAdresow; } }
         public IZbiorFirm Firmy { get { return this as IZbiorFirm; } }
@@ -54,7 +88,7 @@ namespace Dane
         {
             this.DBAdresy.Remove(obj);
             this.SaveChanges();
-          //  this.Set<this.DBAdresy>().Remove(obj);
+            //  this.Set<this.DBAdresy>().Remove(obj);
         }
 
         IEnumerable<Logika.Adres> IZbiorAdresow.Wczytaj()
@@ -177,7 +211,7 @@ namespace Dane
         #region IZbiorDanych->Uzytkownikow
         public void Zapisz(Logika.Uzytkownik obj)
         {
-            this.DBUżytkownicy.Add(obj);
+            this.DBUzytkownicy.Add(obj);
             this.SaveChanges();
         }
 
@@ -189,13 +223,13 @@ namespace Dane
 
         public void Usun(Logika.Uzytkownik obj)
         {
-            this.DBUżytkownicy.Remove(obj);
+            this.DBUzytkownicy.Remove(obj);
             this.SaveChanges();
         }
 
         IEnumerable<Logika.Uzytkownik> IZbiorUzytkownikow.Wczytaj()
         {
-            var listaUzytkownikow = from p in this.DBUżytkownicy select p;
+            var listaUzytkownikow = from p in this.DBUzytkownicy select p;
             return listaUzytkownikow.AsEnumerable();
         }
         #endregion
