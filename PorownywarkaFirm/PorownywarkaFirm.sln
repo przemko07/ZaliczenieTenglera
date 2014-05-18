@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logika", "Logika\Logika.csproj", "{F72615CC-EA5F-489E-BC30-D0B253140FD8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gui", "gui\gui.csproj", "{B203870F-F193-4329-A228-B8E9E72105E4}"
@@ -14,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAplikacja", "IAplikacja\IAplikacja.csproj", "{7B89E22D-3EEF-4F19-A5F3-08D9DBBB5458}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplikacja", "Aplikacja\Aplikacja.csproj", "{AF106CC4-7E40-45FD-BDBE-1C086B90E8D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{07BC145F-8D2A-4924-A898-CE884241BD6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +45,10 @@ Global
 		{AF106CC4-7E40-45FD-BDBE-1C086B90E8D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF106CC4-7E40-45FD-BDBE-1C086B90E8D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF106CC4-7E40-45FD-BDBE-1C086B90E8D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07BC145F-8D2A-4924-A898-CE884241BD6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07BC145F-8D2A-4924-A898-CE884241BD6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07BC145F-8D2A-4924-A898-CE884241BD6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07BC145F-8D2A-4924-A898-CE884241BD6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
