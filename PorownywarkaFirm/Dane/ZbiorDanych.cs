@@ -1,4 +1,5 @@
 ﻿using IDane;
+using Logika;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,6 +11,15 @@ namespace Dane
 {
     public class ZbiorDanych : DbContext, IZbiorDanych
     {
+        public ZbiorDanych() : base() { }
+         
+        public DbSet<Adres> DBAdresy { get; set; }
+        public DbSet<Firma> DBFirmy { get; set; }
+        public DbSet<Komentarz> DBKomentarze { get; set; }
+        public DbSet<Kontakt> DBKontakty { get; set; }
+        public DbSet<Ocena> DBOceny { get; set; }
+        public DbSet<Uzytkownik> DBUżytkownicy { get; set; }
+        
         #region pomocnik
         public IZbiorAdresow Adresy { get { return this as IZbiorAdresow; } }
         public IZbiorFirm Firmy { get { return this as IZbiorFirm; } }
@@ -30,22 +40,27 @@ namespace Dane
         #region IZbiorDanych->ZbiorAdresow
         public void Zapisz(Logika.Adres obj)
         {
-            throw new NotImplementedException();
+            this.DBAdresy.Add(obj);
+            this.SaveChanges();
         }
 
         public void Popraw(Logika.Adres obj)
         {
-            throw new NotImplementedException();
+            this.Entry(obj).State = EntityState.Modified;
+            this.SaveChanges();
         }
 
         public void Usun(Logika.Adres obj)
         {
-            throw new NotImplementedException();
+            this.DBAdresy.Remove(obj);
+            this.SaveChanges();
+          //  this.Set<this.DBAdresy>().Remove(obj);
         }
 
         IEnumerable<Logika.Adres> IZbiorAdresow.Wczytaj()
         {
-            throw new NotImplementedException();
+            var listaUzytkownikow = from p in this.DBAdresy select p;
+            return listaUzytkownikow.AsEnumerable();
         }
         #endregion
 
@@ -53,22 +68,26 @@ namespace Dane
         #region IZbiorDanych->ZbiorFirm
         public void Zapisz(Logika.Firma obj)
         {
-            throw new NotImplementedException();
+            this.DBFirmy.Add(obj);
+            this.SaveChanges();
         }
 
         public void Popraw(Logika.Firma obj)
         {
-            throw new NotImplementedException();
+            this.Entry(obj).State = EntityState.Modified;
+            this.SaveChanges();
         }
 
         public void Usun(Logika.Firma obj)
         {
-            throw new NotImplementedException();
+            this.DBFirmy.Remove(obj);
+            this.SaveChanges();
         }
 
         IEnumerable<Logika.Firma> IZbiorFirm.Wczytaj()
         {
-            throw new NotImplementedException();
+            var listaFirm = from p in this.DBFirmy select p;
+            return listaFirm.AsEnumerable();
         }
         #endregion
 
@@ -77,22 +96,26 @@ namespace Dane
 
         public void Zapisz(Logika.Komentarz obj)
         {
-            throw new NotImplementedException();
+            this.DBKomentarze.Add(obj);
+            this.SaveChanges();
         }
 
         public void Popraw(Logika.Komentarz obj)
         {
-            throw new NotImplementedException();
+            this.Entry(obj).State = EntityState.Modified;
+            this.SaveChanges();
         }
 
         public void Usun(Logika.Komentarz obj)
         {
-            throw new NotImplementedException();
+            this.DBKomentarze.Remove(obj);
+            this.SaveChanges();
         }
 
         IEnumerable<Logika.Komentarz> IZbiorKomentarzy.Wczytaj()
         {
-            throw new NotImplementedException();
+            var listaKomentarzy = from p in this.DBKomentarze select p;
+            return listaKomentarzy.AsEnumerable();
         }
         #endregion
 
@@ -100,22 +123,26 @@ namespace Dane
         #region IZbiorDanych->ZbiorKontaktow
         public void Zapisz(Logika.Kontakt obj)
         {
-            throw new NotImplementedException();
+            this.DBKontakty.Add(obj);
+            this.SaveChanges();
         }
 
         public void Popraw(Logika.Kontakt obj)
         {
-            throw new NotImplementedException();
+            this.Entry(obj).State = EntityState.Modified;
+            this.SaveChanges();
         }
 
         public void Usun(Logika.Kontakt obj)
         {
-            throw new NotImplementedException();
+            this.DBKontakty.Remove(obj);
+            this.SaveChanges();
         }
 
         IEnumerable<Logika.Kontakt> IZbiorKontaktow.Wczytaj()
         {
-            throw new NotImplementedException();
+            var listaKontaktow = from p in this.DBKontakty select p;
+            return listaKontaktow.AsEnumerable();
         }
         #endregion
 
@@ -123,22 +150,26 @@ namespace Dane
         #region IZbiorDanych->ZbiorOcen
         public void Zapisz(Logika.Ocena obj)
         {
-            throw new NotImplementedException();
+            this.DBOceny.Add(obj);
+            this.SaveChanges();
         }
 
         public void Popraw(Logika.Ocena obj)
         {
-            throw new NotImplementedException();
+            this.Entry(obj).State = EntityState.Modified;
+            this.SaveChanges();
         }
 
         public void Usun(Logika.Ocena obj)
         {
-            throw new NotImplementedException();
+            this.DBOceny.Remove(obj);
+            this.SaveChanges();
         }
 
         IEnumerable<Logika.Ocena> IZbiorOcen.Wczytaj()
         {
-            throw new NotImplementedException();
+            var listaOcen = from p in this.DBOceny select p;
+            return listaOcen.AsEnumerable();
         }
         #endregion
 
@@ -146,22 +177,26 @@ namespace Dane
         #region IZbiorDanych->Uzytkownikow
         public void Zapisz(Logika.Uzytkownik obj)
         {
-            throw new NotImplementedException();
+            this.DBUżytkownicy.Add(obj);
+            this.SaveChanges();
         }
 
         public void Popraw(Logika.Uzytkownik obj)
         {
-            throw new NotImplementedException();
+            this.Entry(obj).State = EntityState.Modified;
+            this.SaveChanges();
         }
 
         public void Usun(Logika.Uzytkownik obj)
         {
-            throw new NotImplementedException();
+            this.DBUżytkownicy.Remove(obj);
+            this.SaveChanges();
         }
 
         IEnumerable<Logika.Uzytkownik> IZbiorUzytkownikow.Wczytaj()
         {
-            throw new NotImplementedException();
+            var listaUzytkownikow = from p in this.DBUżytkownicy select p;
+            return listaUzytkownikow.AsEnumerable();
         }
         #endregion
     }
