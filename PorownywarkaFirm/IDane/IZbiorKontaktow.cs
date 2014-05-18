@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace IDane
 {
-    public interface IZbiorKontaktow : IZbiorCzegos<Kontakt>
+    public interface IZbiorKontaktow
     {
+        void Zapisz(Kontakt kontakt);
+        void Popraw(Kontakt kontakt);
+        void Usun(Kontakt kontakt);
+        IEnumerable<Kontakt> Wczytaj();
     }
 }

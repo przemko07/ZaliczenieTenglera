@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace IDane
 {
-    public interface IZbiorAdresow : IZbiorCzegos<Adres>
+    public interface IZbiorAdresow
     {
+        void Zapisz(Adres adres);
+        void Popraw(Adres adres);
+        void Usun(Adres adres);
+        IEnumerable<Adres> Wczytaj();
     }
 }

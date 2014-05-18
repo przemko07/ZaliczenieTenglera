@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IZbiorAdresow.cs" />
-    <Compile Include="IZbiorCzegos.cs" />
     <Compile Include="IZbiorDanych.cs" />
     <Compile Include="IZbiorFirm.cs" />
     <Compile Include="IZbiorKomentarzy.cs" />

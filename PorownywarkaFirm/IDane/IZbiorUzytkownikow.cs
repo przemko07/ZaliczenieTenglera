@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace IDane
 {
-    public interface IZbiorUzytkownikow : IZbiorCzegos<Uzytkownik>
+    public interface IZbiorUzytkownikow
     {
+        void Zapisz(Uzytkownik uzytkownik);
+        void Popraw(Uzytkownik uzytkownik);
+        void Usun(Uzytkownik uzytkownik);
+        IEnumerable<Uzytkownik> Wczytaj();
     }
 }

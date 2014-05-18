@@ -33,8 +33,8 @@ namespace gui
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
             builder.RegisterType<ZbiorDanych>().As<IZbiorDanych>().InstancePerRequest();
-            builder.RegisterType<ZbiorFunkcji>().As<IZbiorFunkcji>().InstancePerRequest();
-
+            //builder.RegisterType<ZbiorFunkcji>().As<IZbiorFunkcji>().InstancePerRequest();
+            
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }

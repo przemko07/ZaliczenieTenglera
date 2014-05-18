@@ -16,7 +16,6 @@ namespace gui.Controllers
         // GET: /Firma/
         public ActionResult Index(IZbiorFunkcji aplikacja)
         {
-            // = new ZbiorFunkcji();
             Firma firma = aplikacja.PobierzNajlepszeFirmy().First();
             Ocena srednia_ocen = aplikacja.ObliczSredniaOceneFirmy(firma);
 

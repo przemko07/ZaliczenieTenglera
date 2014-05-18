@@ -43,7 +43,7 @@ namespace Dane
             throw new NotImplementedException();
         }
 
-        IEnumerable<Logika.Adres> IZbiorCzegos<Logika.Adres>.Wczytaj()
+        IEnumerable<Logika.Adres> IZbiorAdresow.Wczytaj()
         {
             throw new NotImplementedException();
         }
@@ -66,7 +66,7 @@ namespace Dane
             throw new NotImplementedException();
         }
 
-        IEnumerable<Logika.Firma> IZbiorCzegos<Logika.Firma>.Wczytaj()
+        IEnumerable<Logika.Firma> IZbiorFirm.Wczytaj()
         {
             throw new NotImplementedException();
         }
@@ -90,7 +90,7 @@ namespace Dane
             throw new NotImplementedException();
         }
 
-        IEnumerable<Logika.Komentarz> IZbiorCzegos<Logika.Komentarz>.Wczytaj()
+        IEnumerable<Logika.Komentarz> IZbiorKomentarzy.Wczytaj()
         {
             throw new NotImplementedException();
         }
@@ -113,7 +113,7 @@ namespace Dane
             throw new NotImplementedException();
         }
 
-        IEnumerable<Logika.Kontakt> IZbiorCzegos<Logika.Kontakt>.Wczytaj()
+        IEnumerable<Logika.Kontakt> IZbiorKontaktow.Wczytaj()
         {
             throw new NotImplementedException();
         }
@@ -136,7 +136,7 @@ namespace Dane
             throw new NotImplementedException();
         }
 
-        IEnumerable<Logika.Ocena> IZbiorCzegos<Logika.Ocena>.Wczytaj()
+        IEnumerable<Logika.Ocena> IZbiorOcen.Wczytaj()
         {
             throw new NotImplementedException();
         }
@@ -159,7 +159,7 @@ namespace Dane
             throw new NotImplementedException();
         }
 
-        IEnumerable<Logika.Uzytkownik> IZbiorCzegos<Logika.Uzytkownik>.Wczytaj()
+        IEnumerable<Logika.Uzytkownik> IZbiorUzytkownikow.Wczytaj()
         {
             throw new NotImplementedException();
         }

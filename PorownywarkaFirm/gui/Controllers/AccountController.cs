@@ -18,7 +18,7 @@ namespace gui.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        public AccountController(IZbiorDanych dane)
+        public AccountController(IZbiorDanych dane, IAplikacja.IZbiorFunkcji a)
             : this(new UserManager<Uzytkownik>(new UserStore<Uzytkownik>(dane.DBContext as DbContext)))
         {
         }

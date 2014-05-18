@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace IDane
 {
-    public interface IZbiorFirm : IZbiorCzegos<Firma>
+    public interface IZbiorFirm
     {
+        void Zapisz(Firma firma);
+        void Popraw(Firma firma);
+        void Usun(Firma firma);
+        IEnumerable<Firma> Wczytaj();
     }
 }

@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace IDane
 {
-    public interface IZbiorKomentarzy : IZbiorCzegos<Komentarz>
+    public interface IZbiorKomentarzy
     {
+        void Zapisz(Komentarz komentarz);
+        void Popraw(Komentarz komentarz);
+        void Usun(Komentarz komentarz);
+        IEnumerable<Komentarz> Wczytaj();
     }
 }

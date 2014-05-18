@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace IDane
 {
-    public interface IZbiorOcen : IZbiorCzegos<Ocena>
+    public interface IZbiorOcen
     {
+        void Zapisz(Ocena ocena);
+        void Popraw(Ocena ocena);
+        void Usun(Ocena ocena);
+        IEnumerable<Ocena> Wczytaj();
     }
 }
