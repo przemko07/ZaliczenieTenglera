@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Aplikacja
 {
-    public class ZbiorFunkcji : IZbiorFunkcji
+    public class ZbiorFunkcji
     {
         public IZbiorDanych dane { get; set; }
         //public ZbiorFunkcji(IZbiorDanych dane)
@@ -18,14 +18,14 @@ namespace Aplikacja
         //}
         public ZbiorFunkcji()
         {
-            
+
         }
 
         public void OcenienieKomentarzaPozytywnie(int id_komentarz, string id_uzytkownik)
         {
             OcenienieKomentarzaPozytywnie(
-                dane.Komentarze.Wczytaj().FirstOrDefault(n=>n.id == id_komentarz),
-                dane.Uzytkownicy.Wczytaj().FirstOrDefault(n=>n.Id == id_uzytkownik));
+                dane.Komentarze.Wczytaj().FirstOrDefault(n => n.id == id_komentarz),
+                dane.Uzytkownicy.Wczytaj().FirstOrDefault(n => n.Id == id_uzytkownik));
         }
         public void OcenienieKomentarzaPozytywnie(Logika.Komentarz komentarz, Logika.Uzytkownik uzytkownik)
         {

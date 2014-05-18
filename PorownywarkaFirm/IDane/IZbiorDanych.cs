@@ -12,7 +12,8 @@ namespace IDane
         IZbiorKomentarzy,
         IZbiorKontaktow,
         IZbiorOcen,
-        IZbiorUzytkownikow
+        IZbiorUzytkownikow,
+        IDisposable
     {
         #region pomocnik
         IZbiorAdresow Adresy { get; }
