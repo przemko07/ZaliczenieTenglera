@@ -26,7 +26,7 @@ namespace gui
 
             AutoFacBuilder();
         }
-
+        
         private static void AutoFacBuilder()
         {
             var builder = new ContainerBuilder();

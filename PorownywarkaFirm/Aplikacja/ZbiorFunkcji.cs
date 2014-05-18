@@ -12,10 +12,13 @@ namespace Aplikacja
     public class ZbiorFunkcji : IZbiorFunkcji
     {
         public IZbiorDanych dane { get; set; }
-
-        public ZbiorFunkcji(IZbiorDanych dane)
+        //public ZbiorFunkcji(IZbiorDanych dane)
+        //{
+        //    this.dane = dane;
+        //}
+        public ZbiorFunkcji()
         {
-            this.dane = dane;
+            
         }
 
         public void OcenienieKomentarzaPozytywnie(int id_komentarz, string id_uzytkownik)
@@ -53,7 +56,10 @@ namespace Aplikacja
 
         public IEnumerable<Logika.Firma> PobierzNajlepszeFirmy()
         {
-            throw new NotImplementedException();
+            return new[]
+            {
+                new Firma()
+            };
         }
 
         public IEnumerable<Logika.Firma> Pobierz10NajlepszychFirmWedlogPaczki(int paczka)
@@ -104,7 +110,18 @@ namespace Aplikacja
 
         public Logika.Ocena ObliczSredniaOceneFirmy(Logika.Firma firma)
         {
-            throw new NotImplementedException();
+            return new Ocena
+            {
+                atmosera = 1,
+                czas_swiadczenia_uslug = 2,
+                kontakt_z_przelozonymi = 3,
+                lokalizacja = 4,
+                poziom_obslugi = 5,
+                poziom_swiadczonej_uslugi = 6,
+                wyglad_firmy = 7,
+                wyposazenie = 8,
+                zarobki = 9,
+            };
         }
         public Logika.Ocena ObliczSredniaOceneFirmy(int id_firma)
         {
