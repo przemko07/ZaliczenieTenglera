@@ -34,7 +34,7 @@ namespace ConsoleApplication1
                     case 2:
                         break;
                     case 4:
-                        var lis= (con as IZbiorCzegos<Adres>).Wczytaj();
+                        var lis= (con as IZbiorAdresow).Wczytaj();
                         foreach (var i in lis) Console.WriteLine(i.miasto);
                         break;
                 }
