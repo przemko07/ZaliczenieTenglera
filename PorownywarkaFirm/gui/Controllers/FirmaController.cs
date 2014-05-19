@@ -14,7 +14,13 @@ namespace gui.Controllers
     {
         //
         // GET: /Firma/
-        public ActionResult Index(IZbiorFunkcji aplikacja)
+        IZbiorFunkcji aplikacja { get; set; }
+        public FirmaController(IZbiorFunkcji aplikacja)
+        {
+            this.aplikacja = aplikacja;
+        }
+
+        public ActionResult Index()
         {
             Firma firma = aplikacja.PobierzNajlepszeFirmy().First();
             Ocena srednia_ocen = aplikacja.ObliczSredniaOceneFirmy(firma);

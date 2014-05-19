@@ -13,7 +13,7 @@ namespace Dane
     public class ZbiorDanych : DbContext, IZbiorDanych
     {
         public ZbiorDanych()
-            : base()
+            : base("Dane.ZbiorDanych")
         {
             System.Data.Entity.Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ZbiorDanych>());
         }

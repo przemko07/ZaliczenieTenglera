@@ -9,16 +9,12 @@ using System.Threading.Tasks;
 
 namespace Aplikacja
 {
-    public class ZbiorFunkcji
+    public class ZbiorFunkcji : IZbiorFunkcji
     {
         public IZbiorDanych dane { get; set; }
-        //public ZbiorFunkcji(IZbiorDanych dane)
-        //{
-        //    this.dane = dane;
-        //}
-        public ZbiorFunkcji()
+        public ZbiorFunkcji(IZbiorDanych dane)
         {
-
+            this.dane = dane;
         }
 
         public void OcenienieKomentarzaPozytywnie(int id_komentarz, string id_uzytkownik)
