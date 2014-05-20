@@ -43,11 +43,26 @@ namespace Aplikacja
 
         public void OcenienieKomentarzaNegatywnie(int id_komentarz, string id_uzytkownik)
         {
-            throw new NotImplementedException();
+            OcenienieKomentarzaNegatywnie(
+                dane.Komentarze.Wczytaj().FirstOrDefault(n => n.id == id_komentarz),
+                dane.Uzytkownicy.Wczytaj().FirstOrDefault(n => n.Id == id_uzytkownik));
         }
         public void OcenienieKomentarzaNegatywnie(Logika.Komentarz komentarz, Logika.Uzytkownik uzytkownik)
         {
-            throw new NotImplementedException();
+            if (komentarz == null) throw new BrakKomentarza();
+            if (uzytkownik == null) throw new BrakUzytkownika();
+            if (uzytkownik.wystawione_komentarze.Count(n => n.id == komentarz.id) > 0) throw new UzytkownikOceniaSiebie();
+            if (komentarz.uzytkownicy_korzy_ocenili.Count(n => n.Id == uzytkownik.Id) > 0) throw new UzytkownikOceniaKolejnyRaz();
+
+            if (komentarz.uzytkownicy_korzy_ocenili == null) komentarz.uzytkownicy_korzy_ocenili = new List<Uzytkownik>();
+            if (uzytkownik.ocenione_komentarze == null) uzytkownik.ocenione_komentarze = new List<Komentarz>();
+
+            komentarz.ocena -= 1;
+            komentarz.uzytkownicy_korzy_ocenili.Add(uzytkownik);
+            uzytkownik.ocenione_komentarze.Add(komentarz);
+
+            dane.Komentarze.Popraw(komentarz);
+            dane.Uzytkownicy.Popraw(uzytkownik);
         }
 
         public IEnumerable<Logika.Firma> PobierzNajlepszeFirmy()
