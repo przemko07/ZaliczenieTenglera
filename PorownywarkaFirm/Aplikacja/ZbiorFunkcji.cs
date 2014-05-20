@@ -69,13 +69,59 @@ namespace Aplikacja
         {
             return new[]
             {
-                new Firma()
+                new Firma
+                {
+                    nazwa = "Evatronix",
+                    adres = new Adres
+                    {
+                        miasto = "Bielsko-Biała",
+                        numer_budynku = "2",
+                        numer_lokalu = "0"
+                    },
+                    kontakt = new Kontakt
+                    {
+                        mail = "evatronix@gmail.com",
+                        numer_komurkowy= "514361562"
+                    }
+                },
             };
         }
 
         public IEnumerable<Logika.Firma> Pobierz10NajlepszychFirmWedlogPaczki(int paczka)
         {
-            throw new NotImplementedException();
+            return new[]
+            { 
+                new Firma
+                {
+                    nazwa = "Evatronix",
+                    adres = new Adres
+                    {
+                        miasto = "Bielsko-Biała",
+                        numer_budynku = "2",
+                        numer_lokalu = "0"
+                    },
+                    kontakt = new Kontakt
+                    {
+                        mail = "evatronix@gmail.com",
+                        numer_komurkowy= "514361562"
+                    }
+                },
+                new Firma
+                {
+                    nazwa = "name1",
+                    adres = new Adres
+                    {
+                        miasto = "name2",
+                        numer_budynku = "1",
+                        numer_lokalu = "2",
+                    },
+                    kontakt = new Kontakt
+                    {
+                        mail = "qwe@asd.com",
+                        numer_komurkowy="213 23231 231 1231 123"
+                    }
+                },
+            };
         }
 
         public IEnumerable<Logika.Komentarz> PobierzNajlepszeKomentarzeFirmy(int id_firma)
@@ -135,6 +181,12 @@ namespace Aplikacja
             };
         }
         public Logika.Ocena ObliczSredniaOceneFirmy(int id_firma)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Firma PobierzFirmePoId(int id_firmy)
         {
             throw new NotImplementedException();
         }

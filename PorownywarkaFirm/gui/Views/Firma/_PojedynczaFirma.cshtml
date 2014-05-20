@@ -1,0 +1,19 @@
+﻿@model gui.ViewModels.PojedynczaFirmaVM
+@using ExtensionMVC5;
+
+<dt>
+    @Html.DisplayTextFor(n => n.nazwa_firmy)
+</dt>
+<dd>
+    @Html.DisplayTextFor(n => n.adres_firmy)
+</dd>
+<dt>
+    @Html.DisplayTextFor(n => n.email_firmy)
+</dt>
+<dd>
+    @Html.DisplayTextFor(n => n.telefon_firmy)
+</dd>
+<dd>
+    <img src="@Html.GetUrlFromChart(Model.wykres)" width="400" height="250" />
+</dd>
+

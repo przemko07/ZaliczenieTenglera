@@ -1,0 +1,18 @@
+﻿@model IEnumerable<gui.ViewModels.PojedynczaFirmaVM>
+@{
+    ViewBag.Title = "RankingFirm";
+}
+
+<h2>RankingFirm</h2>
+
+<table>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @Html.Partial("_PojedynczaFirma", item)
+        </tr>
+    }
+</table>
+
+

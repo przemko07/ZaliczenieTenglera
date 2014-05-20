@@ -8,9 +8,9 @@ using System.Web.Helpers;
 
 namespace gui.ViewModels
 {
-    public class NajlepszaFirmaVM : FirmaVM
+    public class PojedynczaFirmaVM : FirmaVM
     {
-        public NajlepszaFirmaVM(Firma firma, Ocena srednia_ocena)
+        public PojedynczaFirmaVM(Firma firma, Ocena srednia_ocena)
             : base (firma, srednia_ocena)
         {
         }

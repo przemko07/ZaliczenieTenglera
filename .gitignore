@@ -106,3 +106,6 @@ UpgradeLog*.XML
 
 # Modeler UML
 *.simp.bak
+
+#obrazki
+\graphs

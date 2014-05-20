@@ -35,5 +35,7 @@ namespace IAplikacja
 
         Ocena ObliczSredniaOceneFirmy(Firma firma);
         Ocena ObliczSredniaOceneFirmy(int id_firma);
+
+        Firma PobierzFirmePoId(int id_firmy);
     }
 }
