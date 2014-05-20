@@ -1,4 +1,4 @@
-﻿
+﻿@model gui.ViewModels.SczegolowaFirmaVM
 @{
     ViewBag.Title = "SzczegolyFirmy";
 }
@@ -23,3 +23,12 @@
         <img src="@Html.GetUrlFromChart(Model.wykres)" width="400" height="250" />
     </dd>
 </dl>
+
+@foreach (var item in Model.komentarze)
+{
+    <dd>
+        @Html.DisplayFor(modelItem=>item.Item2)
+        @Html.ActionImage("~/Images/positive.png", "like", "likedislike", "OcenKomentarzPozytywnie", "Firma", new { id = item.Item1 })
+        @Html.ActionImage("~/Images/negative.png", "dislike", "likedislike", "OcenKomentarzNegatywnie", "Firma", new { id = item.Item1 })
+    </dd>
+}

@@ -50,7 +50,7 @@ namespace gui.Controllers
             return View(new SczegolowaFirmaVM(firma, ocena, komentarze));
         }
 
-        [HttpPost]
+
         public ActionResult OcenKomentarzPozytywnie(int id = -1)
         {
             aplikacja.OcenienieKomentarzaPozytywnie(id, User.Identity.GetUserId());
@@ -58,7 +58,7 @@ namespace gui.Controllers
             return View();
         }
 
-        [HttpPost]
+
         public ActionResult OcenKomentarzNegatywnie(int id = -1)
         {
             aplikacja.OcenienieKomentarzaNegatywnie(id, User.Identity.GetUserId());
