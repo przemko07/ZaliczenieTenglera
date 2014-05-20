@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace gui.Controllers
 {
@@ -49,5 +50,20 @@ namespace gui.Controllers
             return View(new SczegolowaFirmaVM(firma, ocena, komentarze));
         }
 
+        [HttpPost]
+        public ActionResult OcenKomentarzPozytywnie(int id = -1)
+        {
+            aplikacja.OcenienieKomentarzaPozytywnie(id, User.Identity.GetUserId());
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult OcenKomentarzNegatywnie(int id = -1)
+        {
+            aplikacja.OcenienieKomentarzaNegatywnie(id, User.Identity.GetUserId());
+
+            return View();
+        }
     }
 }

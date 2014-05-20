@@ -27,7 +27,7 @@ namespace Aplikacja
         {
             if (komentarz == null) throw new BrakKomentarza();
             if (uzytkownik == null) throw new BrakUzytkownika();
-            if (uzytkownik.wystawione_komentarze.Count(n => n.id == komentarz.id) > 0) throw new UzytkownikOceniaSiebie();
+            if (uzytkownik.wystawione_komentarze..Count(n => n.id == komentarz.id) > 0) throw new UzytkownikOceniaSiebie();
             if (komentarz.uzytkownicy_korzy_ocenili.Count(n => n.Id == uzytkownik.Id) > 0) throw new UzytkownikOceniaKolejnyRaz();
 
             if (komentarz.uzytkownicy_korzy_ocenili == null) komentarz.uzytkownicy_korzy_ocenili = new List<Uzytkownik>();
@@ -130,7 +130,13 @@ namespace Aplikacja
         }
         public IEnumerable<Logika.Komentarz> PobierzNajlepszeKomentarzeFirmy(Logika.Firma firma)
         {
-            throw new NotImplementedException();
+            return new[]
+            {
+                new Komentarz() {id = 1, tresc = "komment1"},
+                new Komentarz() {id = 1, tresc = "komment2"},
+                new Komentarz() {id = 2, tresc = "komment3"},
+                new Komentarz() {id = 3, tresc = "komment4"},
+            };
         }
 
         public IEnumerable<Logika.Komentarz> PobierzNajlepszeKomentarzeFirmyWedlogPaczki(int paczka)
@@ -185,10 +191,9 @@ namespace Aplikacja
             throw new NotImplementedException();
         }
 
-
         public Firma PobierzFirmePoId(int id_firmy)
         {
-            throw new NotImplementedException();
+            return new Firma();
         }
     }
 }
