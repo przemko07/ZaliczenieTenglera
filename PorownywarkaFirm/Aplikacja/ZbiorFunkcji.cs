@@ -27,7 +27,7 @@ namespace Aplikacja
         {
             if (komentarz == null) throw new BrakKomentarza();
             if (uzytkownik == null) throw new BrakUzytkownika();
-            if (uzytkownik.wystawione_komentarze..Count(n => n.id == komentarz.id) > 0) throw new UzytkownikOceniaSiebie();
+            if (uzytkownik.wystawione_komentarze.Count(n => n.id == komentarz.id) > 0) throw new UzytkownikOceniaSiebie();
             if (komentarz.uzytkownicy_korzy_ocenili.Count(n => n.Id == uzytkownik.Id) > 0) throw new UzytkownikOceniaKolejnyRaz();
 
             if (komentarz.uzytkownicy_korzy_ocenili == null) komentarz.uzytkownicy_korzy_ocenili = new List<Uzytkownik>();

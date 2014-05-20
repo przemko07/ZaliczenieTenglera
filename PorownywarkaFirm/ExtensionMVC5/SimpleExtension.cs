@@ -15,7 +15,7 @@ namespace ExtensionMVC5
         public static object obj = new object();
         public static object GetUrlFromChart(this HtmlHelper helper, Chart chart)
         {
-                string path = "~/App_Data/graphs/";
+                string path = "~/Images/graphs/";
                 string filename = path + Guid.NewGuid();
                 chart.ToWebImage("jpeg").Save(filename);
                 return filename + ".jpeg";
