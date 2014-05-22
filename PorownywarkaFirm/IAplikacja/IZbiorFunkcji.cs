@@ -15,6 +15,10 @@ namespace IAplikacja
         void OcenienieKomentarzaNegatywnie(int id_komentarz, string id_uzytkownik);
         void OcenienieKomentarzaNegatywnie(Komentarz komentarz, Uzytkownik uzytkownik);
 
+        /// <summary>
+        /// Pobiera wszystkie firmy z bazy, w porządku od najlespzej do najgorszej
+        /// </summary>
+        /// <returns>firmy z bazy w porządku od najlepszej do najgorszej</returns>
         IEnumerable<Firma> PobierzNajlepszeFirmy();
 
         IEnumerable<Firma> Pobierz10NajlepszychFirmWedlogPaczki(int paczka);

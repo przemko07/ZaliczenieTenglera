@@ -9,12 +9,6 @@ namespace gui.ViewModels
 {
     public class OcenaFirmyVM : FirmaVM
     {
-        public int id_firmy { get; set; }
-        public string nazwa_firmy { get; set; }
-        public string adres_firmy { get; set; }
-        public string email_firmy { get; set; }
-        public string telefon_firmy { get; set; }
-
         public int wyglad_firmy { get; set; }
         public int poziom_obslugi { get; set; }
         public int czas_swiadczenia_uslug { get; set; }
@@ -27,7 +21,7 @@ namespace gui.ViewModels
 
         public OcenaFirmyVM(Firma firma, Ocena srednia_ocena)
             : base(firma, srednia_ocena)
-        {-
+        {
             this.wyglad_firmy = srednia_ocena.wyglad_firmy;
             this.poziom_obslugi = srednia_ocena.poziom_obslugi;
             this.czas_swiadczenia_uslug = srednia_ocena.czas_swiadczenia_uslug;
