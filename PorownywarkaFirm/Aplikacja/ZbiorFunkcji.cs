@@ -104,7 +104,7 @@ namespace Aplikacja
         {
             if (uzytkownik == null) throw new BrakUzytkownika();
             if (firma == null) throw new BrakFirmy();
-            if (uzytkownik.firma != null && firma != uzytkownik.firma) throw new UzytkownikDodajeDrugaFirme();
+            if (uzytkownik.firma != null) throw new UzytkownikDodajeDrugaFirme();
             uzytkownik.firma = firma;
             firma.wlasciciel = uzytkownik;
         }
