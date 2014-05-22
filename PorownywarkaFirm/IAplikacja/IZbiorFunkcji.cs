@@ -22,8 +22,13 @@ namespace IAplikacja
         IEnumerable<Komentarz> PobierzNajlepszeKomentarzeFirmy(int id_firma);
         IEnumerable<Komentarz> PobierzNajlepszeKomentarzeFirmy(Firma firma);
 
+<<<<<<< HEAD
         IEnumerable<Komentarz> PobierzNajlepszeKomentarzeFirmyWedlogPaczki(int id_firma, int paczka);
         IEnumerable<Komentarz> PobierzNajlepszeKomentarzeFirmyWedlogPaczki(Firma firma, int paczka);
+=======
+        IEnumerable<Komentarz> PobierzNajlepszeKomentarzeFirmyWedlogPaczki(int id_firmy, int paczka);
+        IEnumerable<Logika.Komentarz> PobierzNajlepszeKomentarzeFirmyWedlogPaczki(Logika.Firma firma, int paczka);
+>>>>>>> bfee811cd1820f2a30e798a323184b30f426f8c3
 
         void ZarejestrujFirmeUzytkownika(string id_uzytkownik, int id_firma);
         void ZarejestrujFirmeUzytkownika(Uzytkownik uzytkownik, Firma firma);
