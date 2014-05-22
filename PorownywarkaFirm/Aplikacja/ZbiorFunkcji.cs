@@ -96,7 +96,6 @@ namespace Aplikacja
         {
             return firma.komentarze.OrderBy(n => n.ocena);
         }
-
         public void ZarejestrujFirmeUzytkownika(string id_uzytkownik, int id_firma)
         {
             ZarejestrujFirmeUzytkownika(dane.Uzytkownicy.Wczytaj().FirstOrDefault(n => n.Id == id_uzytkownik), dane.Firmy.Wczytaj().FirstOrDefault(n => n.id == id_firma));
