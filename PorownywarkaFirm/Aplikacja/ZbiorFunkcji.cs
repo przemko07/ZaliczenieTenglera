@@ -96,9 +96,9 @@ namespace Aplikacja
         {
             return firma.komentarze.OrderBy(n => n.ocena);
         }
-        public void ZarejestrujFirmeUzytkownika(string id_uzytkownik, int id_firma)
+        public void ZarejestrujFirmeUzytkownika(string id_uzytkownik, Firma firma)
         {
-            ZarejestrujFirmeUzytkownika(dane.Uzytkownicy.Wczytaj().FirstOrDefault(n => n.Id == id_uzytkownik), dane.Firmy.Wczytaj().FirstOrDefault(n => n.id == id_firma));
+            ZarejestrujFirmeUzytkownika(dane.Uzytkownicy.Wczytaj().FirstOrDefault(n => n.Id == id_uzytkownik), firma);
         }
         public void ZarejestrujFirmeUzytkownika(Logika.Uzytkownik uzytkownik, Logika.Firma firma)
         {
@@ -109,9 +109,9 @@ namespace Aplikacja
             firma.wlasciciel = uzytkownik;
         }
 
-        public void WystawOceneFirmie(string id_uzytkownik, int id_firma, int id_ocena)
+        public void WystawOceneFirmie(string id_uzytkownik, int id_firma, Ocena ocena)
         {
-            WystawOceneFirmie(dane.Uzytkownicy.Wczytaj().FirstOrDefault(n => n.Id == id_uzytkownik), dane.Firmy.Wczytaj().FirstOrDefault(n => n.id == id_firma), dane.Oceny.Wczytaj().FirstOrDefault(n => n.id == id_ocena));
+            WystawOceneFirmie(dane.Uzytkownicy.Wczytaj().FirstOrDefault(n => n.Id == id_uzytkownik), dane.Firmy.Wczytaj().FirstOrDefault(n => n.id == id_firma), ocena);
         }
         public void WystawOceneFirmie(Logika.Uzytkownik uzytkownik, Logika.Firma firma, Logika.Ocena ocena)
         {
@@ -129,9 +129,9 @@ namespace Aplikacja
             ocena.uzytkownik = uzytkownik;
         }
 
-        public void WystawKomentarzFirmie(string id_uzytkownik, int id_firma, int id_komentarz)
+        public void WystawKomentarzFirmie(string id_uzytkownik, int id_firma, Komentarz komentarz)
         {
-            WystawKomentarzFirmie(dane.Uzytkownicy.Wczytaj().FirstOrDefault(n => n.Id == id_uzytkownik), dane.Firmy.Wczytaj().FirstOrDefault(n => n.id == id_firma), dane.Komentarze.Wczytaj().FirstOrDefault(n => n.id == id_komentarz));
+            WystawKomentarzFirmie(dane.Uzytkownicy.Wczytaj().FirstOrDefault(n => n.Id == id_uzytkownik), dane.Firmy.Wczytaj().FirstOrDefault(n => n.id == id_firma), komentarz);
         }
         public void WystawKomentarzFirmie(Logika.Uzytkownik uzytkownik, Logika.Firma firma, Logika.Komentarz komentarz)
         {
@@ -198,6 +198,11 @@ namespace Aplikacja
         public Firma PobierzFirmePoId(int id_firmy)
         {
             return new Firma();
+        }
+
+        public Uzytkownik PobierzUzytkownikaPoId(string id_uzytkownika)
+        {
+            throw new NotImplementedException();
         }
     }
 }

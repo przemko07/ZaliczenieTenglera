@@ -78,6 +78,10 @@ namespace gui.Controllers
         [HttpPost]
         public ActionResult OcenFirme(OcenaFirmyVM vm)
         {
+            Ocena ocena = vm.StworzOcene();
+
+            aplikacja.WystawOceneFirmie(User.Identity.GetUserId(), vm.id_firmy, ocena);
+
             return RedirectToAction("SzczegolyFirmy", vm.id_firmy);
         }
 

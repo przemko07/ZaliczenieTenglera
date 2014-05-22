@@ -38,7 +38,7 @@ namespace gui.ViewModels
 
         }
 
-        public Ocena StworzOcene(Firma firma, Uzytkownik uzytkownik)
+        public Ocena StworzOcene()
         {
             return new Ocena
             {
@@ -50,10 +50,7 @@ namespace gui.ViewModels
                 atmosera = this.atmosera,
                 zarobki = this.zarobki,
                 kontakt_z_przelozonymi = this.kontakt_z_przelozonymi,
-                wyposazenie = this.wyposazenie,
-
-                firma = firma,
-                uzytkownik = uzytkownik,
+                wyposazenie = this.wyposazenie
             };
         }
     }
