@@ -55,5 +55,10 @@ namespace gui.ViewModels
                 Debug.WriteLine(e);
             }
         }
+
+        public FirmaVM()
+        {
+
+        }
     }
 }

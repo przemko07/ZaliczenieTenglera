@@ -1,0 +1,15 @@
+﻿@model gui.ViewModels.OcenaFirmyVM
+@{
+    ViewBag.Title = "OcenFirme";
+}
+
+<h2>OcenFirme</h2>
+
+@Html.BeginForm()
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(n=>n.id_firmy)
+    @Html.EditorFor(n=>n.wyglad_firmy)
+    
+    <input type="submit" value="ocen"/>
+}

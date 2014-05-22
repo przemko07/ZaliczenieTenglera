@@ -195,5 +195,16 @@ namespace Aplikacja
         {
             return new Firma();
         }
+
+
+        public IEnumerable<Komentarz> PobierzNajlepszeKomentarzeFirmyWedlogPaczki(int id_firma, int paczka)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Komentarz> PobierzNajlepszeKomentarzeFirmyWedlogPaczki(Firma firma, int paczka)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

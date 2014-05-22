@@ -51,7 +51,7 @@ namespace gui.Controllers
         }
 
 
-        public ActionResult OcenKomentarzPozytywnie(int id = -1)
+        public ActionResult OcenKomentarzPozytywnie(int id = 0)
         {
             aplikacja.OcenienieKomentarzaPozytywnie(id, User.Identity.GetUserId());
 
@@ -59,11 +59,27 @@ namespace gui.Controllers
         }
 
 
-        public ActionResult OcenKomentarzNegatywnie(int id = -1)
+        public ActionResult OcenKomentarzNegatywnie(int id = 0)
         {
             aplikacja.OcenienieKomentarzaNegatywnie(id, User.Identity.GetUserId());
 
             return View();
         }
+
+        public ActionResult OcenFirme(int id = 0)
+        {
+            id = 90;
+            Firma firma = aplikacja.PobierzFirmePoId(id);
+            Ocena ocena = aplikacja.ObliczSredniaOceneFirmy(firma);
+
+            return View(new OcenaFirmyVM(firma, ocena));
+        }
+
+        [HttpPost]
+        public ActionResult OcenFirme(OcenaFirmyVM vm)
+        {
+            return RedirectToAction("SzczegolyFirmy", vm.id_firmy);
+        }
+
     }
 }
