@@ -25,8 +25,16 @@ namespace gui.Controllers
         public ActionResult Index()
         {
             Firma firma = aplikacja.PobierzNajlepszeFirmy().First();
-            Ocena srednia_ocen = aplikacja.ObliczSredniaOceneFirmy(firma);
 
+            Ocena srednia_ocen = Ocena.Null;
+            try
+            {
+                srednia_ocen = aplikacja.ObliczSredniaOceneFirmy(firma);
+            }
+            catch(BrakOceny e)
+            {
+                srednia_ocen = Ocena.Null;
+            }
             return View(new NajlepszaFirmaVM(firma, srednia_ocen));
         }
 
@@ -68,8 +76,7 @@ namespace gui.Controllers
 
         public ActionResult OcenFirme(int id = 0)
         {
-            id = 90;
-            Firma firma = aplikacja.PobierzFirmePoId(id);
+            Firma firma = aplikacja.PobierzFirmePoId(id); firma.id = 90;
             Ocena ocena = aplikacja.ObliczSredniaOceneFirmy(firma);
 
             return View(new OcenaFirmyVM(firma, ocena));
@@ -85,5 +92,32 @@ namespace gui.Controllers
             return RedirectToAction("SzczegolyFirmy", vm.id_firmy);
         }
 
+        [HttpPost]
+        public ActionResult DodajKomentarz(int id_firma, string tresc)
+        {
+            Komentarz komentarz = new Komentarz
+            {
+                tresc = tresc,
+            };
+
+            aplikacja.WystawKomentarzFirmie(User.Identity.GetUserId(), id_firma, komentarz);
+
+            return View();
+        }
+
+        public ActionResult StworzFirme()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult StworzFirme(NowaFirmaVM vm)
+        {
+            Firma firma = vm.SwtorzFirme();
+
+            aplikacja.ZarejestrujFirmeUzytkownika(User.Identity.GetUserId(), firma);
+
+            return RedirectToAction("SzczegolyFirmy", firma.id);
+        }
     }
 }

@@ -5,11 +5,12 @@
 
 <h2>OcenFirme</h2>
 
-@Html.BeginForm()
-{
+@using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(n=>n.id_firmy)
-    @Html.EditorFor(n=>n.wyglad_firmy)
+    @Html.ValidationSummary()
     
-    <input type="submit" value="ocen"/>
+    @Html.HiddenFor(n => n.id_firmy)
+    @Html.EditorFor(n => n.wyglad_firmy)
+
+    <input type="submit" value="ocen" />
 }

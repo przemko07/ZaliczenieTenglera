@@ -1,0 +1,84 @@
+﻿@model gui.ViewModels.NowaFirmaVM
+
+@{
+    ViewBag.Title = "StworzFirme";
+}
+
+<h2>StworzFirme</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>NowaFirmaVM</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.miasto, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.miasto)
+                @Html.ValidationMessageFor(model => model.miasto)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ulica, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ulica)
+                @Html.ValidationMessageFor(model => model.ulica)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.numer_budynku, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.numer_budynku)
+                @Html.ValidationMessageFor(model => model.numer_budynku)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.numer_lokalu, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.numer_lokalu)
+                @Html.ValidationMessageFor(model => model.numer_lokalu)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.mail, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.mail)
+                @Html.ValidationMessageFor(model => model.mail)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.numer_komurkowy, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.numer_komurkowy)
+                @Html.ValidationMessageFor(model => model.numer_komurkowy)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nazwa, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nazwa)
+                @Html.ValidationMessageFor(model => model.nazwa)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -33,3 +33,9 @@
         @Html.ActionImage("~/Images/negative.png", "dislike", "likedislike", "OcenKomentarzNegatywnie", "Firma", new { id = item.Item1 })
     </dd>
 }
+
+@using (Html.BeginForm("DodajKomentarz", "Firma", new { id_firmy = Model.id_firmy, tresc = "" }))
+{
+    @Html.TextAreaFor(n=>n.tresc) <br/>
+    <input type="submit" value="Add Comment"/>
+}

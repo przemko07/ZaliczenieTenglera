@@ -68,7 +68,19 @@ namespace Aplikacja
 
         public IEnumerable<Logika.Firma> PobierzNajlepszeFirmy()
         {
-            return dane.Firmy.Wczytaj().OrderBy(n => Srednia(ObliczSredniaOceneFirmy(n)));
+            return dane.Firmy.Wczytaj().OrderBy(new Func<Firma, double>((n)=>
+                    {
+                        double tmp;
+                        try
+                        {
+                            tmp = Srednia(ObliczSredniaOceneFirmy(n));
+                        }
+                        catch (BrakOcen e)
+                        {
+                            tmp = 0;
+                        }
+                        return tmp;
+                    }));
         }
 
         public IEnumerable<Logika.Firma> Pobierz10NajlepszychFirmWedlogPaczki(int paczka)
@@ -83,6 +95,8 @@ namespace Aplikacja
         }
         public IEnumerable<Logika.Komentarz> PobierzNajlepszeKomentarzeFirmy(Logika.Firma firma)
         {
+            if (firma.komentarze == null) return new List<Logika.Komentarz>();
+            
             return firma.komentarze.OrderBy(n => n.ocena);
         }
 
@@ -153,6 +167,12 @@ namespace Aplikacja
 
         public Logika.Ocena ObliczSredniaOceneFirmy(Logika.Firma firma)
         {
+            return new Ocena
+            {
+                wyglad_firmy = 4,
+            };
+
+            if (firma.oceny == null) throw new BrakOcen();
             if (firma.oceny.Count == 0) throw new BrakOcen();
             if (firma.oceny.Count == 1) return firma.oceny.ElementAt(0);
             else
