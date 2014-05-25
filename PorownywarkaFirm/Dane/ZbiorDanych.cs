@@ -46,11 +46,11 @@ namespace Dane
 
             modelBuilder.Entity<Ocena>().HasRequired(n => n.uzytkownik).WithMany(n => n.oceny_firm);
             modelBuilder.Entity<Ocena>().HasRequired(n => n.firma).WithMany(n => n.oceny);
-          
+
             modelBuilder.Entity<Uzytkownik>().HasOptional(n => n.firma).WithOptionalPrincipal(n => n.wlasciciel);
             modelBuilder.Entity<Uzytkownik>().HasMany(n => n.ocenione_komentarze).WithMany(n => n.uzytkownicy_korzy_ocenili);
             modelBuilder.Entity<Uzytkownik>().HasMany(n => n.wystawione_komentarze).WithRequired(n => n.wlasciciel).WillCascadeOnDelete(false);
-            
+
             modelBuilder.Entity<Komentarz>().HasRequired(n => n.firma).WithMany(n => n.komentarze);
         }
 
@@ -121,7 +121,7 @@ namespace Dane
         IEnumerable<Logika.Firma> IZbiorFirm.Wczytaj()
         {
             var listaFirm = from p in this.DBFirmy select p;
-            return listaFirm.AsEnumerable();
+            return listaFirm.ToArray();
         }
         #endregion
 
@@ -149,7 +149,7 @@ namespace Dane
         IEnumerable<Logika.Komentarz> IZbiorKomentarzy.Wczytaj()
         {
             var listaKomentarzy = from p in this.DBKomentarze select p;
-            return listaKomentarzy.AsEnumerable();
+            return listaKomentarzy.ToArray();
         }
         #endregion
 
@@ -176,7 +176,7 @@ namespace Dane
         IEnumerable<Logika.Kontakt> IZbiorKontaktow.Wczytaj()
         {
             var listaKontaktow = from p in this.DBKontakty select p;
-            return listaKontaktow.AsEnumerable();
+            return listaKontaktow.ToArray();
         }
         #endregion
 
@@ -203,7 +203,7 @@ namespace Dane
         IEnumerable<Logika.Ocena> IZbiorOcen.Wczytaj()
         {
             var listaOcen = from p in this.DBOceny select p;
-            return listaOcen.AsEnumerable();
+            return listaOcen.ToArray();
         }
         #endregion
 
@@ -230,7 +230,7 @@ namespace Dane
         IEnumerable<Logika.Uzytkownik> IZbiorUzytkownikow.Wczytaj()
         {
             var listaUzytkownikow = from p in this.DBUzytkownicy select p;
-            return listaUzytkownikow.AsEnumerable();
+            return listaUzytkownikow.ToArray();
         }
         #endregion
     }

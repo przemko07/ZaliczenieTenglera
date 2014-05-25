@@ -23,7 +23,7 @@
             @Html.DisplayTextFor(n => n.telefon_firmy)
         </dd>
         <dd>
-            <img src="@Html.GetUrlFromChart(Model.wykres)" width="400" height="250"/>
+            @Html.ActionImage("~/Images/graphs/3baaf58f-6a13-423c-a82e-ff386b3a702f.jpeg", "", "", "SzczegolyFirmy", "Firma", new { id_firmy = Model.id_firmy })
         </dd>
 
     </dl>

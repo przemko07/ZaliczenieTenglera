@@ -30,14 +30,14 @@ namespace IAplikacja
         IEnumerable<Logika.Komentarz> PobierzNajlepszeKomentarzeFirmyWedlogPaczki(Logika.Firma firma, int paczka);
 
 
-        void ZarejestrujFirmeUzytkownika(string id_uzytkownik, Firma firma);
-        void ZarejestrujFirmeUzytkownika(Uzytkownik uzytkownik, Firma firma);
+        Firma ZarejestrujFirmeUzytkownika(string id_uzytkownik, Firma firma);
+        Firma ZarejestrujFirmeUzytkownika(Uzytkownik uzytkownik, Firma firma);
 
-        void WystawOceneFirmie(string id_uzytkownik, int id_firma, Ocena ocena);
-        void WystawOceneFirmie(Uzytkownik uzytkownik, Firma firma, Ocena ocena);
+        Ocena WystawOceneFirmie(string id_uzytkownik, int id_firma, Ocena ocena);
+        Ocena WystawOceneFirmie(Uzytkownik uzytkownik, Firma firma, Ocena ocena);
 
-        void WystawKomentarzFirmie(string id_uzytkownik, int id_firma, Komentarz komentarz);
-        void WystawKomentarzFirmie(Uzytkownik uzytkownik, Firma firma, Komentarz komentarz);
+        Komentarz WystawKomentarzFirmie(string id_uzytkownik, int id_firma, Komentarz komentarz);
+        Komentarz WystawKomentarzFirmie(Uzytkownik uzytkownik, Firma firma, Komentarz komentarz);
 
         Ocena ObliczSredniaOceneFirmy(Firma firma);
         Ocena ObliczSredniaOceneFirmy(int id_firma);

@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <appSettings>
-  <add key="configuration">
+  <configuration>
     <configSections>
       <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
       <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
     </configSections>
-  </add>
-  <add key="connectionStrings">
+  </configuration>
+  <connectionStrings>
     <add name="Dane.Context" providerName="System.Data.SqlClient" connectionString="Data Source=(LocalDB)\v11.0;Initial Catalog=PorownywarkaFirm;Integrated Security=SSPI;MultipleActiveResultSets=True" />
-  </add>
-  <add key="entityFramework">
+  </connectionStrings>
+  <entityFramework>
     <defaultConnectionFactory type="System.Data.Entity.Infrastructure.LocalDbConnectionFactory, EntityFramework">
       <parameters>
         <parameter value="v11.0" />
@@ -18,5 +18,5 @@
     <providers>
       <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
     </providers>
-  </add>
+  </entityFramework>
 </appSettings>

@@ -21,5 +21,13 @@ namespace Logika
         public virtual ICollection<Ocena> oceny { get; set; }
 
         public virtual ICollection<Komentarz> komentarze { get; set; }
+
+        public static Firma Null
+        {
+            get
+            {
+                return null;
+            }
+        }
     }
 }

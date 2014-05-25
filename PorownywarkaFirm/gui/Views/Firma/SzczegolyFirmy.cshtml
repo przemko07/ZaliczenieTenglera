@@ -27,15 +27,41 @@
 @foreach (var item in Model.komentarze)
 {
     <dd>
-        @Html.DisplayFor(modelItem => item.Item2)
-        @Html.DisplayFor(modelItem => item.Item3)
-        @Html.ActionImage("~/Images/positive.png", "like", "likedislike", "OcenKomentarzPozytywnie", "Firma", new { id = item.Item1 })
-        @Html.ActionImage("~/Images/negative.png", "dislike", "likedislike", "OcenKomentarzNegatywnie", "Firma", new { id = item.Item1 })
+        @Html.DisplayFor(modelItem => item.Item2)<br/>
+        <label id="like_count">@item.Item3</label>
+        <img src="~/Images/positive.png" onclick="OnLike(@item.Item1)" class="likedislike"/>
+        <img src="~/Images/negative.png" onclick="OnDislike(@item.Item1)" class="likedislike" />
     </dd>
 }
 
-@using (Html.BeginForm("DodajKomentarz", "Firma", new { id_firmy = Model.id_firmy, tresc = "" }))
+@using (Html.BeginForm("DodajKomentarz", "Firma", new { id_firmy = Model.id_firmy }))
 {
-    @Html.TextAreaFor(n=>n.tresc) <br/>
-    <input type="submit" value="Add Comment"/>
+    @Html.TextArea("tresc")
+    <input type="submit" value="Add Comment" />
+}
+
+@section scripts {
+    <script>
+        function OnLike(id)
+        {
+            $.ajax({
+                url: 'OcenKomentarzPozytywnie',
+                data: { id_komentarza: id },
+                success: function () {
+                    document.getElementById("like_count").innerHTML = parseInt(document.getElementById("like_count").innerHTML) + 1;
+                }
+            });
+        }
+        function OnDislike(id)
+        {
+            $.ajax({
+                url: 'OcenKomentarzNegatywnie',
+                data: { id_komentarza: id },
+                success: function () {
+                    document.getElementById("like_count").innerHTML = parseInt(document.getElementById("like_count").innerHTML) - 1;
+                }
+            });
+        }
+    </script>
+}
 }

@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using System.Diagnostics;
 
 namespace gui.Controllers
 {
@@ -24,14 +25,14 @@ namespace gui.Controllers
 
         public ActionResult Index()
         {
-            Firma firma = aplikacja.PobierzNajlepszeFirmy().First();
+            Firma firma = aplikacja.PobierzNajlepszeFirmy().FirstOrDefault();
 
             Ocena srednia_ocen = Ocena.Null;
             try
             {
                 srednia_ocen = aplikacja.ObliczSredniaOceneFirmy(firma);
             }
-            catch(BrakOceny e)
+            catch (BrakOcen e)
             {
                 srednia_ocen = Ocena.Null;
             }
@@ -48,76 +49,129 @@ namespace gui.Controllers
             return View(vm);
         }
 
-        public ActionResult SzczegolyFirmy(int id = 0)
+        public ActionResult SzczegolyFirmy(int id_firmy = 0)
         {
-            Firma firma = aplikacja.PobierzFirmePoId(id);
-            Ocena ocena = aplikacja.ObliczSredniaOceneFirmy(firma);
+            Firma firma = Firma.Null;
+            try
+            {
+                firma = aplikacja.PobierzFirmePoId(id_firmy);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
 
-            IEnumerable<Komentarz> komentarze = aplikacja.PobierzNajlepszeKomentarzeFirmy(firma);
+            Ocena ocena = Ocena.Null;
+            try
+            {
+                ocena = aplikacja.ObliczSredniaOceneFirmy(firma);
+            }
+            catch (BrakOcen e)
+            {
+                ocena = Ocena.Null;
+            }
+            IEnumerable<Komentarz> komentarze = null;
+            try
+            {
+                komentarze = aplikacja.PobierzNajlepszeKomentarzeFirmy(firma);
+            }
+            catch (Exception e)
+            {
+                komentarze = new Komentarz[0];
+            }
 
             return View(new SczegolowaFirmaVM(firma, ocena, komentarze));
         }
 
-
-        public ActionResult OcenKomentarzPozytywnie(int id = 0)
+        [Authorize]
+        public void OcenKomentarzPozytywnie(int id_komentarza = 0)
         {
-            aplikacja.OcenienieKomentarzaPozytywnie(id, User.Identity.GetUserId());
-
-            return View();
+            try
+            {
+                aplikacja.OcenienieKomentarzaPozytywnie(id_komentarza, User.Identity.GetUserId());
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
         }
 
-
-        public ActionResult OcenKomentarzNegatywnie(int id = 0)
+        [Authorize]
+        public void OcenKomentarzNegatywnie(int id_komentarza = 0)
         {
-            aplikacja.OcenienieKomentarzaNegatywnie(id, User.Identity.GetUserId());
-
-            return View();
+            try
+            {
+                aplikacja.OcenienieKomentarzaNegatywnie(id_komentarza, User.Identity.GetUserId());
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
         }
 
-        public ActionResult OcenFirme(int id = 0)
+        [Authorize]
+        public ActionResult OcenFirme(int id_firmy = 0)
         {
-            Firma firma = aplikacja.PobierzFirmePoId(id); firma.id = 90;
+            Firma firma = aplikacja.PobierzFirmePoId(id_firmy); firma.id = 90;
             Ocena ocena = aplikacja.ObliczSredniaOceneFirmy(firma);
 
             return View(new OcenaFirmyVM(firma, ocena));
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult OcenFirme(OcenaFirmyVM vm)
         {
             Ocena ocena = vm.StworzOcene();
 
             aplikacja.WystawOceneFirmie(User.Identity.GetUserId(), vm.id_firmy, ocena);
 
-            return RedirectToAction("SzczegolyFirmy", vm.id_firmy);
+            return RedirectToAction("SzczegolyFirmy", new { id_firmy = vm.id_firmy });
         }
 
         [HttpPost]
-        public ActionResult DodajKomentarz(int id_firma, string tresc)
+        [Authorize]
+        public ActionResult DodajKomentarz(int id_firmy = 0)
         {
             Komentarz komentarz = new Komentarz
             {
-                tresc = tresc,
+                tresc = Request["tresc"] as string,
             };
+            try
+            {
+                aplikacja.WystawKomentarzFirmie(User.Identity.GetUserId(), id_firmy, komentarz);
+            }
+            catch (BrakFirmy e)
+            {
+                Debug.WriteLine("Brak firmy:" + id_firmy);
+            }
+            catch (BrakUzytkownika e)
+            {
+                Debug.WriteLine("Brak użytkownika:" + User.Identity.GetUserId());
+            }
+            catch (UzytkownikKomentujeWlasnaFirme e)
+            {
+                Debug.WriteLine("Uzytkownik ocenia wlasna firme:" + id_firmy);
+            }
 
-            aplikacja.WystawKomentarzFirmie(User.Identity.GetUserId(), id_firma, komentarz);
-
-            return View();
+            return RedirectToAction("SzczegolyFirmy", new { id_firmy = id_firmy });
         }
 
+        [Authorize]
         public ActionResult StworzFirme()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult StworzFirme(NowaFirmaVM vm)
         {
             Firma firma = vm.SwtorzFirme();
 
-            aplikacja.ZarejestrujFirmeUzytkownika(User.Identity.GetUserId(), firma);
+            firma = aplikacja.ZarejestrujFirmeUzytkownika(User.Identity.GetUserId(), firma);
 
-            return RedirectToAction("SzczegolyFirmy", firma.id);
+            return RedirectToAction("SzczegolyFirmy", new { id_firmy = firma.id });
         }
     }
 }
