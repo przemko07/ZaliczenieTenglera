@@ -8,9 +8,15 @@ namespace gui.ViewModels
 {
     public class FirmaZRankingiemVM : FirmaVM
     {
-        public double ranking { get; set; }
+        public string ranking { get; set; }
+
         public FirmaZRankingiemVM(Firma firma, double ranking)
-        :base(firma)
+            : base(firma)
+        {
+            this.ranking = ranking.ToString("{0.00}");
+        }
+        public FirmaZRankingiemVM(Firma firma, string ranking)
+            : base(firma)
         {
             this.ranking = ranking;
         }

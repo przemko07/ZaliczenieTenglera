@@ -57,12 +57,12 @@ namespace gui.Controllers
                     }
                     catch (BrakOcen e)
                     {
-                        return new FirmaZRankingiemVM(n, 0);
+                        return new FirmaZRankingiemVM(n, "?");
                     }
                     catch (Exception e)
                     {
                         Debug.WriteLine(e.Message);
-                        return new FirmaZRankingiemVM(n, 0);
+                        return new FirmaZRankingiemVM(n, "?");
                     }
                 });
 

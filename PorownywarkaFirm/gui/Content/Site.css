@@ -45,3 +45,73 @@ input[type="checkbox"].input-validation-error {
     width: 15px;
     height: 15px;
 }
+
+.rgRow {
+         width:100%;
+}
+
+.rgCol { display: block;
+         float:left;
+         margin-left: 0%; 
+}
+
+.boxCol { display: block;
+          float:left;
+          margin-left: 0%; 
+          height:0px;
+          overflow:hidden;
+}
+
+
+.box6  { position: relative; width:    25.0000%    ; padding-bottom:    25.0000%    ; }    
+.bc  {
+    position:absolute;
+    top: 30%;
+    bottom: 30%;
+    left: 30%;
+    right: 30%;
+    overflow: hidden;
+}
+.bbl {
+    display: table;
+    height: 500px;
+    padding-top: 50%;
+    margin-top: -250px;
+    width: 100%;
+}
+.bbl:first-child { margin-left: 0; } /* boxCol - all browsers except IE6 and lower */
+
+.bbl .lbl {
+    display: table-cell;
+    vertical-align: middle;
+    text-align:center;
+}
+#line-h-outter {
+  line-height: 500px;
+  vertical-align: middle;
+  margin-top: -250px;
+  padding-top: 50%;
+}
+#line-h-inner {
+  display: inline-block;
+  line-height: normal;
+  vertical-align: middle;
+  text-align: center;
+  width: 100%;
+}
+
+.divlink
+{ 
+  position:absolute; 
+  width:100%;
+  height:100%;
+  top:0;
+  left: 0;
+
+  /* edit: added z-index */
+  z-index: 1;
+
+  /* edit: fixes overlap error in IE7/8, 
+     make sure you have an empty gif */
+  background-image: url('empty.gif');
+}   

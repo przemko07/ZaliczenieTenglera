@@ -18,7 +18,7 @@ namespace ExtensionMVC5
                 string path = "~/Images/graphs/";
                 string filename = path + Guid.NewGuid();
                 chart.ToWebImage("jpeg").Save(filename);
-                return filename + ".jpeg";
+                return ".." + filename.Substring(1) + ".jpeg";
             
         }
 
