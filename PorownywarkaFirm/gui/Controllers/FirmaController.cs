@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 using System.Diagnostics;
 using gui.Models;
 using gui.Hubs;
+using System.IO;
 
 namespace gui.Controllers
 {
@@ -179,14 +180,18 @@ namespace gui.Controllers
         [Authorize]
         public ActionResult StworzFirme()
         {
-            return View();
+            if (aplikacja.UzytkownikMozeStworzycFirme(User.Identity.GetUserId()))
+            {
+                return View();
+            }
+            return RedirectToAction("index");
         }
 
         [HttpPost]
         [Authorize]
-        public ActionResult StworzFirme(NowaFirmaVM vm)
+        public ActionResult StworzFirme(NowaFirmaVM vm, HttpPostedFileBase uploadFile)
         {
-            Firma firma = vm.SwtorzFirme();
+            Firma firma = vm.SwtorzFirme(Server, uploadFile);
 
             firma = aplikacja.ZarejestrujFirmeUzytkownika(User.Identity.GetUserId(), firma);
 

@@ -6,10 +6,10 @@
 
 <h2>StworzFirme</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("StworzFirme", "Firma", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>NowaFirmaVM</h4>
         <hr />
@@ -71,14 +71,20 @@
             </div>
         </div>
 
+        <input id="uploadFile" name="uploadFile" type="file" />
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" id="submit-all" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
-}
+
+
+}    
 
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+

@@ -12,6 +12,8 @@ namespace Logika
 
         public string nazwa { get; set; }
 
+        public string zdjecie { get; set; }
+
         public virtual Adres adres { get; set; }
 
         public virtual Kontakt kontakt { get; set; }
@@ -21,6 +23,7 @@ namespace Logika
         public virtual ICollection<Ocena> oceny { get; set; }
 
         public virtual ICollection<Komentarz> komentarze { get; set; }
+
 
         public static Firma Null
         {

@@ -115,3 +115,12 @@ input[type="checkbox"].input-validation-error {
      make sure you have an empty gif */
   background-image: url('empty.gif');
 }   
+
+#dropZone {
+        background: gray;
+        border: black dashed 3px;
+        width: 200px;
+        padding: 50px;
+        text-align: center;
+        color: white;
+    }
