@@ -3,6 +3,7 @@ using Autofac;
 using Autofac.Integration.Mvc;
 using Dane;
 using gui.Controllers;
+using gui.Hubs;
 using IAplikacja;
 using IDane;
 using System;
@@ -31,10 +32,11 @@ namespace gui
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterControllers(typeof(MvcApplication).Assembly)    ;
+            builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
             builder.RegisterType<ZbiorDanych>().As<IZbiorDanych>().InstancePerRequest();
             builder.RegisterType<ZbiorFunkcji>().As<IZbiorFunkcji>().InstancePerRequest();
+            builder.RegisterType<MessageBus_Hub>().As<IMessage>().InstancePerRequest();
             
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

@@ -10,6 +10,8 @@ using System.Web.Helpers;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using System.Diagnostics;
+using gui.Models;
+using gui.Hubs;
 
 namespace gui.Controllers
 {
@@ -18,9 +20,12 @@ namespace gui.Controllers
         //
         // GET: /Firma/
         IZbiorFunkcji aplikacja { get; set; }
-        public FirmaController(IZbiorFunkcji aplikacja)
+        IMessage messages { get; set; }
+        public FirmaController(IZbiorFunkcji aplikacja, IMessage messages)
         {
+            messages.SendMessageToAll("ktoś odświeżył strone");
             this.aplikacja = aplikacja;
+            this.messages = messages;
         }
 
         public ActionResult Index()
@@ -36,15 +41,30 @@ namespace gui.Controllers
             {
                 srednia_ocen = Ocena.Null;
             }
-            return View(new NajlepszaFirmaVM(firma, srednia_ocen));
+            return View(new FirmaZSredniaOcenaVM(firma, srednia_ocen));
         }
 
         public ActionResult RankingFirm(int paczka = 0)
         {
             IEnumerable<Firma> firmy = aplikacja.Pobierz10NajlepszychFirmWedlogPaczki(paczka);
 
-            IEnumerable<PojedynczaFirmaVM> vm = firmy.Select(
-                n => new PojedynczaFirmaVM(n, aplikacja.ObliczSredniaOceneFirmy(n)));
+            IEnumerable<FirmaZRankingiemVM> vm = firmy.Select(
+                n =>
+                {
+                    try
+                    {
+                        return new FirmaZRankingiemVM(n, aplikacja.ObliczRankingFirmy(n));
+                    }
+                    catch (BrakOcen e)
+                    {
+                        return new FirmaZRankingiemVM(n, 0);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.WriteLine(e.Message);
+                        return new FirmaZRankingiemVM(n, 0);
+                    }
+                });
 
             return View(vm);
         }
@@ -80,7 +100,7 @@ namespace gui.Controllers
                 komentarze = new Komentarz[0];
             }
 
-            return View(new SczegolowaFirmaVM(firma, ocena, komentarze));
+            return View(new FirmaZSzczegolamiVM(firma, ocena, komentarze));
         }
 
         [Authorize]
@@ -112,10 +132,9 @@ namespace gui.Controllers
         [Authorize]
         public ActionResult OcenFirme(int id_firmy = 0)
         {
-            Firma firma = aplikacja.PobierzFirmePoId(id_firmy); firma.id = 90;
-            Ocena ocena = aplikacja.ObliczSredniaOceneFirmy(firma);
+            Firma firma = aplikacja.PobierzFirmePoId(id_firmy);
 
-            return View(new OcenaFirmyVM(firma, ocena));
+            return View(new OcenaFirmyVM(firma));
         }
 
         [HttpPost]
@@ -171,6 +190,7 @@ namespace gui.Controllers
 
             firma = aplikacja.ZarejestrujFirmeUzytkownika(User.Identity.GetUserId(), firma);
 
+            messages.SendMessageToAll("Została utworzona nowa firma (" + vm.nazwa + ")");
             return RedirectToAction("SzczegolyFirmy", new { id_firmy = firma.id });
         }
     }

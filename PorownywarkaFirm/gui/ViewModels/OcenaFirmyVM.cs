@@ -19,18 +19,9 @@ namespace gui.ViewModels
         public int kontakt_z_przelozonymi { get; set; }
         public int wyposazenie { get; set; }
 
-        public OcenaFirmyVM(Firma firma, Ocena srednia_ocena)
-            : base(firma, srednia_ocena)
+        public OcenaFirmyVM(Firma firma)
+            : base(firma)
         {
-            this.wyglad_firmy = srednia_ocena.wyglad_firmy;
-            this.poziom_obslugi = srednia_ocena.poziom_obslugi;
-            this.czas_swiadczenia_uslug = srednia_ocena.czas_swiadczenia_uslug;
-            this.lokalizacja = srednia_ocena.czas_swiadczenia_uslug;
-            this.poziom_swiadczonej_uslugi = srednia_ocena.poziom_swiadczonej_uslugi;
-            this.atmosera = srednia_ocena.atmosera;
-            this.zarobki = srednia_ocena.zarobki;
-            this.kontakt_z_przelozonymi = srednia_ocena.kontakt_z_przelozonymi;
-            this.wyposazenie = srednia_ocena.wyposazenie;
         }
 
         public OcenaFirmyVM()

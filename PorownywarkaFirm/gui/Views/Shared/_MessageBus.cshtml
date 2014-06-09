@@ -1,0 +1,30 @@
+﻿@*<ul class="nav navbar-nav navbar-collapse" id="msgs">
+            <select id="msgs" class="selectpicker">
+                <option data-hidden="true">Brak nowych wydarzeń</option>
+            </select>
+    </ul>*@
+
+<div class="btn-group dropup">
+    <button type="button" class="btn btn-default" id="current">Brak wiadomości</button>
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu" id="msgs"></ul>
+</div>
+
+
+@Scripts.Render("~/bundles/signalr")
+<script src="~/signalr/hubs"></script>
+
+<script>
+    $(function () {
+        var hub = $.connection.MessageHub;
+        hub.client.GetMessage = function (msg) {
+            $("#msgs").append(" <li>" + msg + "</li>");
+            $("#current").html(msg);
+        };
+
+        $.connection.hub.start().done();
+    });
+</script>
