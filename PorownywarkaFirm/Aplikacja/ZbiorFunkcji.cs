@@ -243,5 +243,17 @@ namespace Aplikacja
             Ocena ocena = ObliczSredniaOceneFirmy(firma);
             return Srednia(ocena);
         }
+
+
+        public bool UzytkownikMozeStworzycFirme(string id_uzytkownika)
+        {
+            Uzytkownik uzytkownik = dane.Uzytkownicy.Wczytaj().FirstOrDefault(n => n.Id == id_uzytkownika);
+            return UzytkownikMozeStworzycFirme(uzytkownik);
+        }
+
+        public bool UzytkownikMozeStworzycFirme(Uzytkownik uzytkownik)
+        {
+            return uzytkownik.firma == null;
+        }
     }
 }

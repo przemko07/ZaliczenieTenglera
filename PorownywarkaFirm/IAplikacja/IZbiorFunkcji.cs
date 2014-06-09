@@ -48,5 +48,8 @@ namespace IAplikacja
 
         double ObliczRankingFirmy(int id_firma);
         double ObliczRankingFirmy(Firma firma);
+
+        bool UzytkownikMozeStworzycFirme(string id_uzytkownika);
+        bool UzytkownikMozeStworzycFirme(Uzytkownik uzytkownik);
     }
 }

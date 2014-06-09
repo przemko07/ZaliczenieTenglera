@@ -1,8 +1,18 @@
-﻿using Logika;
+﻿using Aplikacja;
+using gui.ViewModels;
+using IAplikacja;
+using Logika;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
+using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using System.Diagnostics;
+using gui.Models;
+using gui.Hubs;
+using System.IO;
 
 namespace gui.ViewModels
 {
@@ -22,11 +32,20 @@ namespace gui.ViewModels
 
         public string nazwa { get; set; }
 
-        public Firma SwtorzFirme()
+
+        internal Firma SwtorzFirme(HttpServerUtilityBase server, HttpPostedFileBase uploadFile)
         {
+            string url = string.Empty;
+            if (uploadFile != null && uploadFile.FileName != string.Empty)
+            {
+                url = Path.Combine(server.MapPath("~/Images/firmy"), uploadFile.FileName);
+                uploadFile.SaveAs(url);
+            }
+
             Firma firma = new Firma
             {
                 nazwa = nazwa,
+                zdjecie = url,
                 adres = new Adres
                 {
                     ulica = ulica,

@@ -15,7 +15,7 @@ namespace gui.ViewModels
         public string adres_firmy { get; set; }
         public string email_firmy { get; set; }
         public string telefon_firmy { get; set; }
-
+        public string zdjecie_firmy { get; set; }
 
         public FirmaVM(Firma firma)
         {
@@ -23,6 +23,7 @@ namespace gui.ViewModels
             {
                 id_firmy = firma.id;
                 nazwa_firmy = firma.nazwa;
+                zdjecie_firmy = firma.zdjecie;
                 adres_firmy =
                     firma.adres.miasto + " " +
                     firma.adres.ulica + " " +
