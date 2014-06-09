@@ -1,23 +1,20 @@
 ﻿@model gui.ViewModels.FirmaZRankingiemVM
-    @using ExtensionMVC5;
+@using ExtensionMVC5;
 
-    <dt>
-        @Html.DisplayTextFor(n => n.nazwa_firmy)
-    </dt>
-    <dd>
-        @Html.DisplayTextFor(n => n.adres_firmy)
-    </dd>
-    <dt>
-        @Html.DisplayTextFor(n => n.email_firmy)
-    </dt>
-    <dd>
-        @Html.DisplayTextFor(n => n.telefon_firmy)
-    </dd>
-    <dd>
-        <div style="position: relative; background: url(~/Images/shield.png); width: 100px; height: 100px;">
-
-            <div style="position: absolute; bottom: 0; left: 0.5em; width: 400px; font-weight: bold; color: #fff;">
-                <p>@Html.DisplayTextFor(n => n.ranking)</p>
-        </div>
-    </div>
+<dt>
+    @Html.DisplayTextFor(n => n.nazwa_firmy)
+</dt>
+<dd>
+    @Html.DisplayTextFor(n => n.adres_firmy)
 </dd>
+<dt>
+    @Html.DisplayTextFor(n => n.email_firmy)
+</dt>
+<dd>
+    @Html.DisplayTextFor(n => n.telefon_firmy)
+</dd>
+<div style="position: relative; background: url(../Images/shield.png); width: 100px; height: 100px;">
+    <div style="position: absolute; bottom: 0; left: 0.5em; width: 100px; height: 100px; font-weight: bold; color: #fff;">
+        <p>@Html.DisplayTextFor(n => n.ranking)</p>
+    </div>
+</div>
