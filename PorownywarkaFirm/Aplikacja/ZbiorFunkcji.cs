@@ -231,5 +231,17 @@ namespace Aplikacja
         {
             throw new NotImplementedException();
         }
+
+        public double ObliczRankingFirmy(int id_firma)
+        {
+            Firma firma = dane.Firmy.Wczytaj().FirstOrDefault(n => n.id == id_firma);
+            return ObliczRankingFirmy(firma);
+        }
+
+        public double ObliczRankingFirmy(Firma firma)
+        {
+            Ocena ocena = ObliczSredniaOceneFirmy(firma);
+            return Srednia(ocena);
+        }
     }
 }

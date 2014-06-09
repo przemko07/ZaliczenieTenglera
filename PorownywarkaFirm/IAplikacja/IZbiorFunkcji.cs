@@ -45,5 +45,8 @@ namespace IAplikacja
         Firma PobierzFirmePoId(int id_firmy);
 
         Uzytkownik PobierzUzytkownikaPoId(string id_uzytkownika);
+
+        double ObliczRankingFirmy(int id_firma);
+        double ObliczRankingFirmy(Firma firma);
     }
 }
