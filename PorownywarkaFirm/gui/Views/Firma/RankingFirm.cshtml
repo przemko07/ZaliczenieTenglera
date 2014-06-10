@@ -1,18 +1,84 @@
-﻿@model IEnumerable<gui.ViewModels.FirmaZRankingiemVM>
+﻿@model gui.ViewModels.PaczkaFirmVM
 @{
     ViewBag.Title = "RankingFirm";
 }
 
 <h2>RankingFirm</h2>
 
-<table>
+<div id="results">
+    @Html.Partial("_PobierzRankingFirm", Model)
+</div>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            @Html.Partial("_PojedynczaFirma", item)
-        </tr>
-    }
-</table>
+<a id="btpoprzednia"><<</a>
 
+@Html.HiddenFor(item => item.aktualna, new { id = "aktualna" })
+@Html.TextBox("paczka", Model.aktualna)
+<input type="button" value="przejdź" id="btprzejdz" />
 
+<a id="btnastepna">>></a>
+
+@section scripts {
+    <script>
+    $(function () {
+        $("#btpoprzednia").click(function () {
+            var paczka = parseInt($("#aktualna").val(), 10) - 1;
+            console.log(paczka);
+            $.ajax({
+                url: "@Url.Action("PobierzRankingFirm")",
+                type: "GET",
+                data: { paczka: paczka },
+                success: function (data) {
+                    $("#results").html("");
+                    $("#results").html(data);
+                    $("#paczka").val(paczka)
+                    $("#aktualna").val(paczka)
+                },
+                error: function (data) {
+                    alert("This user cannot be deleted");
+                },
+                complete: function () {
+                }
+            });
+        });
+        $("#btnastepna").click(function () {
+            var paczka = parseInt($("#aktualna").val(), 10) + 1;
+            console.log(paczka);
+            $.ajax({
+                url: "@Url.Action("PobierzRankingFirm")",
+                type: "GET",
+                data: { paczka: paczka },
+                success: function (data) {
+                    $("#results").html("");
+                    $("#results").html(data);
+                    $("#paczka").val(paczka)
+                    $("#aktualna").val(paczka)
+                },
+                error: function (data) {
+                    alert("This user cannot be deleted");
+                },
+                complete: function () {
+                }
+            });
+        });
+        $("#btprzejdz").click(function () {
+            var paczka = $("#paczka").val()
+            $.ajax({
+                url: "@Url.Action("PobierzRankingFirm")",
+                type: "GET",
+                data: { paczka: paczka },
+                success: function (data) {
+                    $("#results").html("");
+                    $("#results").html(data);
+                    $("#paczka").val(paczka)
+                    $("#aktualna").val(paczka)
+                },
+                error: function (data) {
+                    alert("This user cannot be deleted");
+                },
+                complete: function () {
+                }
+            });
+        });
+    });
+    </script>
+}

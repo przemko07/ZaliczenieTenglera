@@ -23,16 +23,14 @@
         <img src="@Html.GetUrlFromChart(Model.wykres)" width="400" height="250" />
     </dd>
 </dl>
-
-@foreach (var item in Model.komentarze)
+@if (Model.zdjecie_firmy != null && Model.zdjecie_firmy != string.Empty)
 {
-    <dd>
-        @Html.DisplayFor(modelItem => item.Item2)<br/>
-        <label id="like_count+">@item.Item3</label>
-        <img src="~/Images/positive.png" onclick="OnLike(@item.Item1)" class="likedislike"/>
-        <img src="~/Images/negative.png" onclick="OnDislike(@item.Item1)" class="likedislike" />
-    </dd>
+    @Html.ActionImage(Model.zdjecie_firmy, "", "", "SczegolyFirmy", "Firma", new { id_firmy = Model.id_firmy })
 }
+else
+{
+}
+
 
 @using (Html.BeginForm("DodajKomentarz", "Firma", new { id_firmy = Model.id_firmy }))
 {
@@ -40,15 +38,34 @@
     <input type="submit" value="Add Comment" />
 }
 
+@Html.Hidden("paczka", 0)
+<div id="results">
+    @Html.Partial("_KomentarzeList", Model.komentarze)
+</div>
+
 @section scripts {
+    @Scripts.Render("~/bundles/signalr")
+    <script src="~/signalr/hubs"></script>
+
     <script>
+        var hub;
+        $(function () {
+            hub = $.connection.LikeHub;
+            hub.client.PobierzOcene = function (id, ocena) {
+                document.getElementById(id).innerHTML = ocena;
+            };
+
+            $.connection.hub.start().done();
+        });
         function OnLike(id)
         {
             $.ajax({
                 url: 'OcenKomentarzPozytywnie',
+                type: "GET",
                 data: { id_komentarza: id },
-                success: function () {
-                    document.getElementById("like_count").innerHTML = parseInt(document.getElementById("like_count").innerHTML) + 1;
+                success: function (value) {
+                    document.getElementById(id).innerHTML = value;
+                    hub.server.OcenKomentarz(id, value);
                 }
             });
         }
@@ -56,12 +73,39 @@
         {
             $.ajax({
                 url: 'OcenKomentarzNegatywnie',
+                type: "GET",
                 data: { id_komentarza: id },
-                success: function () {
-                    document.getElementById("like_count").innerHTML = parseInt(document.getElementById("like_count").innerHTML) - 1;
+                success: function (value) {
+                    document.getElementById(id).innerHTML = value;
+                    hub.server.OcenKomentarz(id, value);
                 }
             });
         }
+        $(function () {
+            var $win = $(window);
+
+            $win.scroll(function () {
+                if ($win.height() + $win.scrollTop() == $(document).height()) {
+                    var paczka = parseInt($("#paczka").val(), 10) + 1;
+                    $("#paczka").val(paczka);
+                    $.ajax({
+                        url: "@Url.Action("PobierzNajlepszeKomentarze")",
+                        type: "GET",
+                        data: {
+                            id_firma: '@Html.Raw(Json.Encode(Model.id_firmy))',
+                            paczka: paczka,
+                        },
+                    success: function (data) {
+                        $("#results").append(data);
+                    },
+                    error: function (data) {
+                        alert("This user cannot be deleted");
+                    },
+                    complete: function () {
+                    }
+                });
+                }
+            });
+        });
     </script>
-}
 }

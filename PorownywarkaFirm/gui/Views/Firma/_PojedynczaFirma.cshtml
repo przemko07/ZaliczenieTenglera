@@ -24,5 +24,10 @@
 
     </div>
 </div>
-
-@Html.ActionImage("../Images/firmy/shield.png", "", "", "SczegolyFirmy", "Firma", new { id_firmy = Model.id_firmy })
+@if (Model.zdjecie_firmy != null && Model.zdjecie_firmy != string.Empty)
+{ 
+    @Html.ActionImage(Model.zdjecie_firmy, "", "", "SczegolyFirmy", "Firma", new { id_firmy = Model.id_firmy })
+}
+else
+{
+}

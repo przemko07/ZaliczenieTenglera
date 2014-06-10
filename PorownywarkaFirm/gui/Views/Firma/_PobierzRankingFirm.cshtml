@@ -1,0 +1,10 @@
+﻿@model gui.ViewModels.PaczkaFirmVM
+    
+<table>
+@foreach (var item in Model.firmy)
+{
+    <tr>
+        @Html.Partial("_PojedynczaFirma", item)
+    </tr>
+}
+</table>

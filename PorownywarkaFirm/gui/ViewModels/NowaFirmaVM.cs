@@ -32,6 +32,7 @@ namespace gui.ViewModels
 
         public string nazwa { get; set; }
 
+        public string zdjecie { get; set; }
 
         internal Firma SwtorzFirme(HttpServerUtilityBase server, HttpPostedFileBase uploadFile)
         {
@@ -40,6 +41,7 @@ namespace gui.ViewModels
             {
                 url = Path.Combine(server.MapPath("~/Images/firmy"), uploadFile.FileName);
                 uploadFile.SaveAs(url);
+                url = Path.Combine("../Images/firmy", uploadFile.FileName);
             }
 
             Firma firma = new Firma

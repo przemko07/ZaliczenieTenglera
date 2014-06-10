@@ -21,12 +21,9 @@ namespace gui.Controllers
         //
         // GET: /Firma/
         IZbiorFunkcji aplikacja { get; set; }
-        IMessage messages { get; set; }
-        public FirmaController(IZbiorFunkcji aplikacja, IMessage messages)
+        public FirmaController(IZbiorFunkcji aplikacja)
         {
-            messages.SendMessageToAll("ktoś odświeżył strone");
             this.aplikacja = aplikacja;
-            this.messages = messages;
         }
 
         public ActionResult Index()
@@ -45,11 +42,11 @@ namespace gui.Controllers
             return View(new FirmaZSredniaOcenaVM(firma, srednia_ocen));
         }
 
-        public ActionResult RankingFirm(int paczka = 0)
+        public ActionResult RankingFirm()
         {
-            IEnumerable<Firma> firmy = aplikacja.Pobierz10NajlepszychFirmWedlogPaczki(paczka);
+            IEnumerable<Firma> firmy = aplikacja.Pobierz10NajlepszychFirmWedlogPaczki(0);
 
-            IEnumerable<FirmaZRankingiemVM> vm = firmy.Select(
+            IEnumerable<FirmaZRankingiemVM> vms = firmy.Select(
                 n =>
                 {
                     try
@@ -67,7 +64,37 @@ namespace gui.Controllers
                     }
                 });
 
-            return View(vm);
+            return View(new PaczkaFirmVM(0, vms));
+        }
+        public ActionResult PobierzRankingFirm(int paczka)
+        {
+            IEnumerable<Firma> firmy = aplikacja.Pobierz10NajlepszychFirmWedlogPaczki(paczka);
+
+            IEnumerable<FirmaZRankingiemVM> vms = firmy.Select(
+                n =>
+                {
+                    try
+                    {
+                        return new FirmaZRankingiemVM(n, aplikacja.ObliczRankingFirmy(n));
+                    }
+                    catch (BrakOcen e)
+                    {
+                        return new FirmaZRankingiemVM(n, "?");
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.WriteLine(e.Message);
+                        return new FirmaZRankingiemVM(n, "?");
+                    }
+                });
+
+            return PartialView("_PobierzRankingFirm", new PaczkaFirmVM(paczka, vms));
+        }
+
+        public ActionResult PobierzNajlepszeKomentarze(int id_firma, int paczka)
+        {
+            IEnumerable<Komentarz> komentarze = aplikacja.PobierzNajlepszeKomentarzeFirmyWedlogPaczki(id_firma, paczka);
+            return PartialView("_KomentarzeList", komentarze.Select(n => new KomentarzVM(n)));
         }
 
         public ActionResult SzczegolyFirmy(int id_firmy = 0)
@@ -76,6 +103,10 @@ namespace gui.Controllers
             try
             {
                 firma = aplikacja.PobierzFirmePoId(id_firmy);
+            }
+            catch (BrakFirmy)
+            {
+                return RedirectToAction("index");
             }
             catch (Exception e)
             {
@@ -94,7 +125,7 @@ namespace gui.Controllers
             IEnumerable<Komentarz> komentarze = null;
             try
             {
-                komentarze = aplikacja.PobierzNajlepszeKomentarzeFirmy(firma);
+                komentarze = aplikacja.PobierzNajlepszeKomentarzeFirmyWedlogPaczki(firma, 0);
             }
             catch (Exception e)
             {
@@ -105,7 +136,7 @@ namespace gui.Controllers
         }
 
         [Authorize]
-        public void OcenKomentarzPozytywnie(int id_komentarza = 0)
+        public int OcenKomentarzPozytywnie(int id_komentarza = 0)
         {
             try
             {
@@ -115,10 +146,11 @@ namespace gui.Controllers
             {
                 Debug.WriteLine(e.Message);
             }
+            return aplikacja.PobierzOceneKomentarza(id_komentarza);
         }
 
         [Authorize]
-        public void OcenKomentarzNegatywnie(int id_komentarza = 0)
+        public int OcenKomentarzNegatywnie(int id_komentarza = 0)
         {
             try
             {
@@ -128,6 +160,7 @@ namespace gui.Controllers
             {
                 Debug.WriteLine(e.Message);
             }
+            return aplikacja.PobierzOceneKomentarza(id_komentarza);
         }
 
         [Authorize]
@@ -195,7 +228,49 @@ namespace gui.Controllers
 
             firma = aplikacja.ZarejestrujFirmeUzytkownika(User.Identity.GetUserId(), firma);
 
-            messages.SendMessageToAll("Została utworzona nowa firma (" + vm.nazwa + ")");
+            return RedirectToAction("SzczegolyFirmy", new { id_firmy = firma.id });
+        }
+
+        public MvcHtmlString CzyFirmaJest()
+        {
+            Uzytkownik uzytkownik = aplikacja.PobierzUzytkownikaPoId(User.Identity.GetUserId());
+            if (uzytkownik == null)
+            {
+                return new MvcHtmlString("false");
+            }
+            if (uzytkownik.firma != null)
+            {
+                return new MvcHtmlString("true");
+            }
+            else
+            {
+                return new MvcHtmlString("false");
+            }
+        }
+
+        [Authorize]
+        public ActionResult EdytujFirme()
+        {
+            Uzytkownik uzytkownik = aplikacja.PobierzUzytkownikaPoId(User.Identity.GetUserId());
+
+            if (uzytkownik.firma != null)
+            {
+                return View(new EdytujFirmaVM(uzytkownik.firma));
+            }
+            else
+            {
+                return RedirectToAction("index");
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult EdytujFirme(EdytujFirmaVM vm, HttpPostedFileBase uploadFile)
+        {
+            Firma firma = vm.SwtorzFirme(Server, uploadFile);
+
+            firma = aplikacja.ZarejestrujFirmeUzytkownika(User.Identity.GetUserId(), firma);
+
             return RedirectToAction("SzczegolyFirmy", new { id_firmy = firma.id });
         }
     }

@@ -1,0 +1,11 @@
+﻿@model IEnumerable<gui.ViewModels.KomentarzVM>
+
+@foreach (var item in Model)
+{
+    <dd>
+        @Html.DisplayFor(modelItem => item.tresc)<br />
+        <label id="@item.id">@item.ocena</label>
+        <img src="~/Images/positive.png" onclick="OnLike(@item.id)" class="likedislike" />
+        <img src="~/Images/negative.png" onclick="OnDislike(@item.id)" class="likedislike" />
+    </dd>
+}

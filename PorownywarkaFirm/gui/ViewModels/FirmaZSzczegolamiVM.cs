@@ -10,12 +10,12 @@ namespace gui.ViewModels
 {
     public class FirmaZSzczegolamiVM : FirmaZSredniaOcenaVM
     {
-        public IEnumerable<Tuple<int, string, int>> komentarze { get; set; } // id | tresc | like
+        public IEnumerable<KomentarzVM> komentarze { get; set; }
         public FirmaZSzczegolamiVM(Firma firma, Ocena srednia_ocena, IEnumerable<Komentarz> komentarze)
             : base(firma, srednia_ocena)
         {
             this.komentarze = komentarze.Select(
-                n => new Tuple<int, string, int>(n.id, n.tresc, n.ocena));
+                n => new KomentarzVM(n));
         }
 
     }

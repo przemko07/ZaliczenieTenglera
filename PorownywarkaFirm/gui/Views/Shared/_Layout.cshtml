@@ -27,7 +27,14 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Top Firma", "Index", "Firma")</li>
                     <li>@Html.ActionLink("Top10", "RankingFirm", "Firma")</li>
-                    <li>@Html.ActionLink("Dodaj Firme", "StworzFirme", "Firma")</li>
+                    @if (Html.Action("CzyFirmaJest", "Firma").ToString() == "true")
+                    {
+                        <li>@Html.ActionLink("Edytuj Firme", "EdytujFirme", "Firma")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Dodaj Firme", "StworzFirme", "Firma")</li>
+                    }
                 </ul>
                 @Scripts.Render("~/bundles/jquery")
                 @Scripts.Render("~/bundles/signalr")

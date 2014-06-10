@@ -4,11 +4,13 @@ using System.Linq;
 using System.Web;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using IKomunikacja;
+using Logika;
 
 namespace gui.Hubs
 {
     [HubName("MessageHub")]
-    public class MessageHub : Hub, IMessage
+    public class MessageHub : Hub, IMessageBus
     {
         public MessageHub()
         {
@@ -34,17 +36,32 @@ namespace gui.Hubs
             return base.OnDisconnected();
         }
 
-        [HubMethodName("SendMessageToUser")]
-        public void SendMessageToUser(string username, string message)
+        [HubMethodName("WyslijWiadomoscDoWszystkich")]
+        public void WyslijWiadomoscDoWszystkich(string wiadomosc)
         {
-            Clients.Group(username).GetMessage(message);
+            Clients.All.GetMessage(wiadomosc);
+        }
+
+        [HubMethodName("WyslijWiadomoscDoUzytkownika")]
+        public void WyslijWiadomoscDoUzytkownika(string wiadomosc, Uzytkownik uzytkownik)
+        {
+            Clients.Group(uzytkownik.UserName).GetMessage(wiadomosc);
+        }
+
+        public void FirmaZostalaUtworzona(Logika.Firma firma)
+        {
+            Clients.All("w servisie pojawiła się nowa firma " + firma.nazwa);
+        }
+
+        public void TwojFirmaZostalaOceniona(Logika.Uzytkownik uzytkownik)
+        {
+            WyslijWiadomoscDoUzytkownika("twoja firma zyskała nową ocene", uzytkownik);
         }
 
 
-        [HubMethodName("SendMessageToAll")]
-        public void SendMessageToAll(string message)
+        public void TwojaFirmaZostalaZakomentowana(Uzytkownik uzytkownik, string komentarz)
         {
-            Clients.All.GetMessage(message);
+            WyslijWiadomoscDoUzytkownika(komentarz, uzytkownik); 
         }
     }
 }
