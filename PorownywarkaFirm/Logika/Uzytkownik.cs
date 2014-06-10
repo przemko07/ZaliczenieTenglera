@@ -11,6 +11,8 @@ namespace Logika
     {
         public virtual Firma firma { get; set; }
 
+        public string mail { get; set; }
+
         public virtual ICollection<Ocena> oceny_firm { get; set; }
 
         public virtual ICollection<Komentarz> wystawione_komentarze { get; set; }
