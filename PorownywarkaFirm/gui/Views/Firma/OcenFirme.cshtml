@@ -1,4 +1,5 @@
 ﻿@model gui.ViewModels.OcenaFirmyVM
+@using gui.ViewModels;
 @{
     ViewBag.Title = "OcenFirme";
 }
@@ -9,24 +10,39 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
-    string[] values = Model.GetType().GetProperties().Where(n => n.PropertyType == typeof(int)).Select(n => n.Name).ToArray();
-    for (int y = 0; y < 10; y++)
+
+    string[] names = Model.GetType().GetProperties().
+        Where(n => (n.GetCustomAttributes(typeof(OcenaCzastkowa), false)).Count() == 1).
+        Select(n => (n.GetCustomAttributes(typeof(OcenaCzastkowa), false)).Cast<OcenaCzastkowa>().Single().DisplayName).ToArray();
+    string[] values = Model.GetType().GetProperties().
+        Where(n => (n.GetCustomAttributes(typeof(OcenaCzastkowa), false)).Count() == 1).
+        Select(n => n.Name).ToArray();
+        <table>
+            @for (int y = 0; y < values.Count(); y++)
+            {
+                <tr>
+                    <th>
+                        @Html.Label(names[y])
+                    </th>
+                    <td>
+                        <div id='@Html.Raw("toggle" + y + "0")' class="toggle-on" data-hight="true" onclick="metoogle(@y, 0, '@Html.Raw(values[y])')"></div>
+                        @for (int x = 1; x < 10; x++)
+                        {
+                            <div id='@Html.Raw("toggle" + y + "" + x)' class="toggle" data-hight="false" onclick="metoogle(@y, @x, '@Html.Raw(values[y])')"></div>
+                        }
+                        <div />
+                    </td>
+                </tr>
+            }
+        </table>
+
+    @Html.HiddenFor(item => item.id_firmy);
+
+    for (int y = 0; y < values.Count(); y++)
     {
-        <div id='@Html.Raw("toggle" + y + "0")' class="toggle-on" data-hight="false" moseover="do_it()" onclick="metoogle(@y, 0, '@Html.Raw(values[y])')"></div>
-        for (int x = 1; x < 10; x++)
-        {
-            <div id='@Html.Raw("toggle" + y + "" + x)' class="toggle" data-hight="false" onclick="metoogle(@y, @x, '@Html.Raw(values[y])')"></div>
-        }
-        <div/>
+        <input data-val="true" id='@Html.Raw(values[y])' name='@Html.Raw(values[y])' type="hidden" value="0" />
     }
-    
-    <input data-val="true" data-val-number="The field id_firmy must be a number." data-val-required="Pole id_firmy jest wymagane." id="id_firmy" name="id_firmy" type="hidden" value="0" />
-    
-    for (int y = 0; y < 10; y++)
-    {
-        <input class="text-box single-line" data-val="true" id='@Html.Raw(values[y])' name='@Html.Raw(values[y])' type="hidden" value="0" />
-    }
-    
+
     <input type="submit" value="ocen" />
 
 }
@@ -34,13 +50,24 @@
 @section scripts {
     <script src="~/Scripts/jquery-ui-1.10.4.js"></script>
     <script>
-        function do_it() {
-            alert("czas");
-        }
+        $("div[id^='toggle']").mouseover(function (event) {
+            $(event.target).css({ 'background': '#2d5e2b' });
+        });
+        $("div[id^='toggle']").mouseout(function (event) {
+            if ($(event.target).attr('data-hight') == 'true') {
+                //alert('true');
+                $(event.target).css({ 'background': '#1ddb15' });
+            }
+            else {
+                //alert('false');
+                $(event.target).css({ 'background': 'gray' });
+            }
+        });
+
         function metoogle(y, x, prop) {
             $("#" + prop).val(x);
             for (var i = 0; i <= x; i++) {
-                var element = $("#toggle" + y + "" + i); x
+                var element = $("#toggle" + y + "" + i);
                 element.css({ 'background': '#1ddb15' });
                 element.attr('data-hight', true);
             }
