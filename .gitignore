@@ -109,5 +109,6 @@ UpgradeLog*.XML
 
 #obrazki
 \graphs
+\firmy
 *.mdf
 *.ldf
