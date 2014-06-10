@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AF106CC4-7E40-45FD-BDBE-1C086B90E8D0}</ProjectGuid>
+    <ProjectGuid>{292C0F8D-3FF5-48B2-804C-A856D58439A2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Aplikacja</RootNamespace>
-    <AssemblyName>Aplikacja</AssemblyName>
+    <RootNamespace>IKomunikacja</RootNamespace>
+    <AssemblyName>IKomunikacja</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,7 +20,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Aplikacja.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -46,23 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="wyjatki.cs" />
-    <Compile Include="ZbiorFunkcji.cs" />
+    <Compile Include="IMessageBus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IAplikacja\IAplikacja.csproj">
-      <Project>{7b89e22d-3eef-4f19-a5f3-08d9dbbb5458}</Project>
-      <Name>IAplikacja</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IDane\IDane.csproj">
-      <Project>{45355124-7934-45d8-8d18-bba6aaf600b4}</Project>
-      <Name>IDane</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IKomunikacja\IKomunikacja.csproj">
-      <Project>{292c0f8d-3ff5-48b2-804c-a856d58439a2}</Project>
-      <Name>IKomunikacja</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Logika\Logika.csproj">
       <Project>{f72615cc-ea5f-489e-bc30-d0b253140fd8}</Project>
       <Name>Logika</Name>

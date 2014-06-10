@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AF106CC4-7E40-45FD-BDBE-1C086B90E8D0}</ProjectGuid>
+    <ProjectGuid>{293A7781-AEAC-4D89-99E7-2CAD769695F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Aplikacja</RootNamespace>
-    <AssemblyName>Aplikacja</AssemblyName>
+    <RootNamespace>MailMesages</RootNamespace>
+    <AssemblyName>MailMesages</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,7 +20,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Aplikacja.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -46,15 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="wyjatki.cs" />
-    <Compile Include="ZbiorFunkcji.cs" />
+    <Compile Include="MailMessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IAplikacja\IAplikacja.csproj">
-      <Project>{7b89e22d-3eef-4f19-a5f3-08d9dbbb5458}</Project>
-      <Name>IAplikacja</Name>
-    </ProjectReference>
     <ProjectReference Include="..\IDane\IDane.csproj">
       <Project>{45355124-7934-45d8-8d18-bba6aaf600b4}</Project>
       <Name>IDane</Name>

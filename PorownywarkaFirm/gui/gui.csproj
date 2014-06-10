@@ -183,19 +183,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Hubs\IMessage.cs" />
-    <Compile Include="Hubs\MessageBus_Hub.cs" />
+    <Compile Include="Hubs\LikeHub.cs" />
+    <Compile Include="Hubs\ApplicationMessages.cs" />
     <Compile Include="Hubs\MessageHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\EdytujFirmaVM.cs" />
     <Compile Include="ViewModels\FirmaVM.cs" />
     <Compile Include="ViewModels\FirmaZRankingiemVM.cs" />
     <Compile Include="ViewModels\FirmaZSredniaOcenaVM.cs" />
+    <Compile Include="ViewModels\KomentarzVM.cs" />
     <Compile Include="ViewModels\NowaFirmaVM.cs" />
     <Compile Include="ViewModels\OcenaFirmyVM.cs" />
     <Compile Include="ViewModels\FirmaZSzczegolamiVM.cs" />
+    <Compile Include="ViewModels\PaczkaFirmVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -329,6 +332,9 @@
     <Content Include="Views\Firma\OcenFirme.cshtml" />
     <Content Include="Views\Firma\StworzFirme.cshtml" />
     <Content Include="Views\Shared\_MessageBus.cshtml" />
+    <Content Include="Views\Firma\EdytujFirme.cshtml" />
+    <Content Include="Views\Firma\_PobierzRankingFirm.cshtml" />
+    <Content Include="Views\Firma\_KomentarzeList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -363,9 +369,17 @@
       <Project>{45355124-7934-45d8-8d18-bba6aaf600b4}</Project>
       <Name>IDane</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IKomunikacja\IKomunikacja.csproj">
+      <Project>{292c0f8d-3ff5-48b2-804c-a856d58439a2}</Project>
+      <Name>IKomunikacja</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Logika\Logika.csproj">
       <Project>{f72615cc-ea5f-489e-bc30-d0b253140fd8}</Project>
       <Name>Logika</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MailMesages\MailMesages.csproj">
+      <Project>{293a7781-aeac-4d89-99e7-2cad769695f4}</Project>
+      <Name>MailMesages</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

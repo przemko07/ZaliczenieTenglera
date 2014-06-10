@@ -6,6 +6,7 @@ using gui.Controllers;
 using gui.Hubs;
 using IAplikacja;
 using IDane;
+using IKomunikacja;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,7 @@ namespace gui
 
             builder.RegisterType<ZbiorDanych>().As<IZbiorDanych>().InstancePerRequest();
             builder.RegisterType<ZbiorFunkcji>().As<IZbiorFunkcji>().InstancePerRequest();
-            builder.RegisterType<MessageBus_Hub>().As<IMessage>().InstancePerRequest();
+            builder.RegisterType<ApplicationMessages>().As<IMessageBus>().InstancePerRequest();
             
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
