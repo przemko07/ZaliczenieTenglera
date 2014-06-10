@@ -51,5 +51,10 @@ namespace IAplikacja
 
         bool UzytkownikMozeStworzycFirme(string id_uzytkownika);
         bool UzytkownikMozeStworzycFirme(Uzytkownik uzytkownik);
+
+        void EdytujFirmeUzytkownika(Firma firma);
+
+        int PobierzOceneKomentarza(int id_komentarza);
+        int PobierzOceneKomentarza(Komentarz komentarz);
     }
 }

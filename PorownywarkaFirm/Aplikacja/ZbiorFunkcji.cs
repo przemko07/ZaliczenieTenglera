@@ -1,5 +1,6 @@
 ﻿using IAplikacja;
 using IDane;
+using IKomunikacja;
 using Logika;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,12 @@ namespace Aplikacja
     public class ZbiorFunkcji : IZbiorFunkcji
     {
         public IZbiorDanych dane { get; set; }
-        public ZbiorFunkcji(IZbiorDanych dane)
+        public IMessageBus message { get; set; }
+
+        public ZbiorFunkcji(IZbiorDanych dane, IMessageBus message)
         {
             this.dane = dane;
+            this.message = message;
         }
 
         public void OcenienieKomentarzaPozytywnie(int id_komentarz, string id_uzytkownik)
@@ -123,6 +127,7 @@ namespace Aplikacja
             firma.wlasciciel = uzytkownik;
 
             dane.Firmy.Zapisz(firma);
+            message.FirmaZostalaUtworzona(firma);
 
             return dane.Firmy.Wczytaj().Last();
         }
@@ -147,6 +152,7 @@ namespace Aplikacja
             ocena.uzytkownik = uzytkownik;
 
             dane.Firmy.Popraw(firma);
+            message.TwojFirmaZostalaOceniona(firma.wlasciciel);
 
             return dane.Oceny.Wczytaj().Last();
         }
@@ -172,6 +178,7 @@ namespace Aplikacja
             komentarz.firma = firma;
 
             dane.Firmy.Popraw(firma);
+            message.TwojaFirmaZostalaZakomentowana(firma.wlasciciel, komentarz.tresc);
 
             return dane.Komentarze.Wczytaj().Last();
         }
@@ -229,7 +236,7 @@ namespace Aplikacja
 
         public Uzytkownik PobierzUzytkownikaPoId(string id_uzytkownika)
         {
-            throw new NotImplementedException();
+            return dane.Uzytkownicy.Wczytaj().FirstOrDefault(n => n.Id == id_uzytkownika);
         }
 
         public double ObliczRankingFirmy(int id_firma)
@@ -254,6 +261,24 @@ namespace Aplikacja
         public bool UzytkownikMozeStworzycFirme(Uzytkownik uzytkownik)
         {
             return uzytkownik.firma == null;
+        }
+
+
+        public void EdytujFirmeUzytkownika(Firma firma)
+        {
+            dane.Firmy.Popraw(firma);
+        }
+
+
+        public int PobierzOceneKomentarza(int id_komentarza)
+        {
+            Komentarz komentarz = dane.Komentarze.Wczytaj().FirstOrDefault(n => n.id == id_komentarza);
+            return PobierzOceneKomentarza(komentarz);
+        }
+
+        public int PobierzOceneKomentarza(Komentarz komentarz)
+        {
+            return komentarz.ocena;
         }
     }
 }
