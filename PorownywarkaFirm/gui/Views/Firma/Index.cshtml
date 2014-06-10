@@ -26,5 +26,12 @@
             <img src="@Html.GetUrlFromChart(Model.wykres)" width="400" height="250" />
         </dd>
 
+        @if (Model.zdjecie_firmy != null && Model.zdjecie_firmy != string.Empty)
+        {
+            @Html.ActionImage(Model.zdjecie_firmy, "", "", "SczegolyFirmy", "Firma", new { id_firmy = Model.id_firmy })
+        }
+        else
+        {
+        }
     </dl>
 </div>

@@ -5,12 +5,51 @@
 
 <h2>OcenFirme</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
+    string[] values = Model.GetType().GetProperties().Where(n => n.PropertyType == typeof(int)).Select(n => n.Name).ToArray();
+    for (int y = 0; y < 10; y++)
+    {
+        <div id='@Html.Raw("toggle" + y + "0")' class="toggle-on" data-hight="false" moseover="do_it()" onclick="metoogle(@y, 0, '@Html.Raw(values[y])')"></div>
+        for (int x = 1; x < 10; x++)
+        {
+            <div id='@Html.Raw("toggle" + y + "" + x)' class="toggle" data-hight="false" onclick="metoogle(@y, @x, '@Html.Raw(values[y])')"></div>
+        }
+        <div/>
+    }
     
-    @Html.HiddenFor(n => n.id_firmy)
-    @Html.EditorFor(n => n.wyglad_firmy)
-
+    <input data-val="true" data-val-number="The field id_firmy must be a number." data-val-required="Pole id_firmy jest wymagane." id="id_firmy" name="id_firmy" type="hidden" value="0" />
+    
+    for (int y = 0; y < 10; y++)
+    {
+        <input class="text-box single-line" data-val="true" id='@Html.Raw(values[y])' name='@Html.Raw(values[y])' type="hidden" value="0" />
+    }
+    
     <input type="submit" value="ocen" />
+
+}
+
+@section scripts {
+    <script src="~/Scripts/jquery-ui-1.10.4.js"></script>
+    <script>
+        function do_it() {
+            alert("czas");
+        }
+        function metoogle(y, x, prop) {
+            $("#" + prop).val(x);
+            for (var i = 0; i <= x; i++) {
+                var element = $("#toggle" + y + "" + i); x
+                element.css({ 'background': '#1ddb15' });
+                element.attr('data-hight', true);
+            }
+
+            for (var i = x + 1; i < 10; i++) {
+                var element = $("#toggle" + y + "" + i);
+                element.css({ 'background': 'gray' });
+                element.attr('data-hight', false);
+            }
+        }
+    </script>
 }
